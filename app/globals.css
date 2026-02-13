@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
 
 .cursive {
-  font-family: "Cedarville Cursive", cursive;
+  font-family: "Brush Script MT", "Comic Sans MS", cursive;
 }
 .Welcome-text {
   background: linear-gradient(
