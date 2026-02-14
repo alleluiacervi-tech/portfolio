@@ -31,20 +31,25 @@ export default function StarsCanvasLazy() {
     let gradient: CanvasGradient | null = null;
     let stars: Star[] = [];
 
-    const createStar = (): Star => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 2.4 + 0.4,
-      alpha: Math.random() * 0.6 + 0.25,
-      alphaMin: 0.12 + Math.random() * 0.1,
-      alphaMax: 0.78 + Math.random() * 0.2,
-      twinkle:
-        (Math.random() * 0.035 + 0.012) *
-        (Math.random() > 0.5 ? 1 : -1) *
-        SPEED_MULTIPLIER,
-      driftX: (Math.random() - 0.5) * 0.16 * SPEED_MULTIPLIER,
-      driftY: (Math.random() * 0.36 + 0.14) * SPEED_MULTIPLIER,
-    });
+    const createStar = (): Star => {
+      const isSlightlyLarger = Math.random() > 0.88;
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: isSlightlyLarger
+          ? Math.random() * 0.45 + 0.95
+          : Math.random() * 0.35 + 0.22,
+        alpha: Math.random() * 0.6 + 0.25,
+        alphaMin: 0.12 + Math.random() * 0.1,
+        alphaMax: 0.78 + Math.random() * 0.2,
+        twinkle:
+          (Math.random() * 0.035 + 0.012) *
+          (Math.random() > 0.5 ? 1 : -1) *
+          SPEED_MULTIPLIER,
+        driftX: (Math.random() - 0.5) * 0.16 * SPEED_MULTIPLIER,
+        driftY: (Math.random() * 0.36 + 0.14) * SPEED_MULTIPLIER,
+      };
+    };
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -110,9 +115,9 @@ export default function StarsCanvasLazy() {
         ctx.fill();
 
         // Soft halo to make movement obvious without overpowering foreground content.
-        ctx.globalAlpha = star.alpha * 0.35;
+        ctx.globalAlpha = star.alpha * 0.22;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * 2.6, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r * 1.8, 0, Math.PI * 2);
         ctx.fill();
       }
 
