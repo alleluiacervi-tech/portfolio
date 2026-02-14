@@ -14,7 +14,7 @@ const PROFILE_NAME = "Your Name";
 const PROFILE_ROLE = "Full Stack Software Engineer";
 const PROFILE_DESCRIPTION =
   "Write a short professional summary here. Highlight your strengths, experience, and the value you bring to projects.";
-const PROFILE_PHOTO = "/profile-photo.jpg";
+const PROFILE_PHOTO = "/profiol3.png";
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -53,7 +53,7 @@ const HeroContent = () => {
               {" "}
               the best{" "}
             </span>
-            project exprience
+            project experience
           </span>
         </motion.div>
 
@@ -66,6 +66,7 @@ const HeroContent = () => {
         </motion.p>
         <motion.a
           variants={slideInFromLeft(1)}
+          href="#projects"
           className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px]"
         >
           Learn More!
