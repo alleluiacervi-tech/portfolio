@@ -7,6 +7,8 @@ type Star = {
   y: number;
   r: number;
   alpha: number;
+  alphaMin: number;
+  alphaMax: number;
   twinkle: number;
   driftX: number;
   driftY: number;
@@ -14,6 +16,7 @@ type Star = {
 
 export default function StarsCanvasLazy() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const SPEED_MULTIPLIER = 1.9;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,11 +34,16 @@ export default function StarsCanvasLazy() {
     const createStar = (): Star => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: Math.random() * 1.8 + 0.2,
-      alpha: Math.random() * 0.65 + 0.2,
-      twinkle: (Math.random() * 0.02 + 0.006) * (Math.random() > 0.5 ? 1 : -1),
-      driftX: (Math.random() - 0.5) * 0.1,
-      driftY: Math.random() * 0.26 + 0.08,
+      r: Math.random() * 2.4 + 0.4,
+      alpha: Math.random() * 0.6 + 0.25,
+      alphaMin: 0.12 + Math.random() * 0.1,
+      alphaMax: 0.78 + Math.random() * 0.2,
+      twinkle:
+        (Math.random() * 0.035 + 0.012) *
+        (Math.random() > 0.5 ? 1 : -1) *
+        SPEED_MULTIPLIER,
+      driftX: (Math.random() - 0.5) * 0.16 * SPEED_MULTIPLIER,
+      driftY: (Math.random() * 0.36 + 0.14) * SPEED_MULTIPLIER,
     });
 
     const resize = () => {
@@ -61,7 +69,7 @@ export default function StarsCanvasLazy() {
       gradient.addColorStop(0.55, "#050214");
       gradient.addColorStop(1, "#030014");
 
-      const count = Math.max(140, Math.floor((width * height) / 9000));
+      const count = Math.max(220, Math.floor((width * height) / 6000));
       stars = Array.from({ length: count }, createStar);
     };
 
@@ -78,7 +86,7 @@ export default function StarsCanvasLazy() {
 
       for (const star of stars) {
         star.alpha += star.twinkle;
-        if (star.alpha > 0.95 || star.alpha < 0.12) {
+        if (star.alpha > star.alphaMax || star.alpha < star.alphaMin) {
           star.twinkle *= -1;
         }
 
@@ -100,6 +108,12 @@ export default function StarsCanvasLazy() {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
+
+        // Soft halo to make movement obvious without overpowering foreground content.
+        ctx.globalAlpha = star.alpha * 0.35;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r * 2.6, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       ctx.globalAlpha = 1;
@@ -120,7 +134,7 @@ export default function StarsCanvasLazy() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0"
+      className="pointer-events-none fixed inset-0 opacity-95"
       style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
     />
   );

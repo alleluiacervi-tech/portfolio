@@ -14,7 +14,7 @@ const PROFILE_NAME = "Alleluia";
 const PROFILE_ROLE = "Full Stack Software Engineer";
 const PROFILE_DESCRIPTION =
   "I build performant web and mobile products with Next.js, React, Node.js, and TypeScript. I focus on clean architecture, polished UX, and reliable delivery.";
-const PROFILE_PHOTO = "/profiol3.png";
+const PROFILE_PHOTO = "/alleluia.jpg";
 const PROFILE_HIGHLIGHTS = ["Next.js", "React", "TypeScript", "Node.js"];
 
 const HeroContent = () => {
