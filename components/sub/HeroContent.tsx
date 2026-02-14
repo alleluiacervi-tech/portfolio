@@ -10,11 +10,12 @@ import {
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
-const PROFILE_NAME = "Your Name";
+const PROFILE_NAME = "Alleluia";
 const PROFILE_ROLE = "Full Stack Software Engineer";
 const PROFILE_DESCRIPTION =
-  "Write a short professional summary here. Highlight your strengths, experience, and the value you bring to projects.";
+  "I build performant web and mobile products with Next.js, React, Node.js, and TypeScript. I focus on clean architecture, polished UX, and reliable delivery.";
 const PROFILE_PHOTO = "/profiol3.png";
+const PROFILE_HIGHLIGHTS = ["Next.js", "React", "TypeScript", "Node.js"];
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -39,7 +40,7 @@ const HeroContent = () => {
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
           <h1 className="Welcome-text text-[13px]">
-            Fullstack Developer Portfolio
+            Full Stack Developer Portfolio
           </h1>
         </motion.div>
 
@@ -48,12 +49,12 @@ const HeroContent = () => {
           className="flex flex-col gap-6 mt-6 text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span>
-            Providing
+            Building
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
               {" "}
-              the best{" "}
+              reliable digital products{" "}
             </span>
-            project experience
+            from concept to launch
           </span>
         </motion.div>
 
@@ -61,16 +62,27 @@ const HeroContent = () => {
           variants={slideInFromLeft(0.8)}
           className="text-lg text-gray-400 my-5 max-w-[600px]"
         >
-          I&apos;m a Full Stack Software Engineer with experience in Website,
-          Mobile, and Software development. Check out my projects and skills.
+          {PROFILE_DESCRIPTION}
         </motion.p>
-        <motion.a
+        <motion.div
           variants={slideInFromLeft(1)}
-          href="#projects"
-          className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px]"
+          className="flex flex-wrap gap-4"
         >
-          Learn More!
-        </motion.a>
+          <a
+            href="#projects"
+            className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px] px-6"
+          >
+            View Projects
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="py-2 px-6 text-sm border border-[#8b74ff]/70 rounded-lg text-white hover:bg-[#8b74ff]/20 transition-colors"
+          >
+            Download Resume
+          </a>
+        </motion.div>
       </div>
 
       <motion.div
@@ -104,6 +116,16 @@ const HeroContent = () => {
               <p className="mt-4 text-sm leading-6 text-gray-300">
                 {PROFILE_DESCRIPTION}
               </p>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                {PROFILE_HIGHLIGHTS.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full border border-[#8b74ff]/70 bg-[#8b74ff]/10 px-3 py-1 text-xs text-[#d2c8ff]"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
