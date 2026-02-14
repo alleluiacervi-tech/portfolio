@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import StarsCanvas from "@/components/main/StarBackground";
+import StarsCanvasLazy from "@/components/main/StarsCanvasLazy";
 import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#030014] overflow-y-scroll overflow-x-hidden">
-        <StarsCanvas />
+        <StarsCanvasLazy />
         <Navbar />
         {children}
         <Footer />
