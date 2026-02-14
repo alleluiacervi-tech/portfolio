@@ -16,11 +16,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#030014] overflow-y-scroll overflow-x-hidden">
+      <body
+        className="relative min-h-screen bg-[#030014] overflow-y-scroll overflow-x-hidden"
+        style={{ backgroundColor: "#030014" }}
+      >
         <StarsCanvasLazy />
-        <Navbar />
-        {children}
-        <Footer />
+        <div className="relative z-10">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

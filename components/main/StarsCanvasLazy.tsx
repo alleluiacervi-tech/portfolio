@@ -8,7 +8,8 @@ type Star = {
   r: number;
   alpha: number;
   twinkle: number;
-  drift: number;
+  driftX: number;
+  driftY: number;
 };
 
 export default function StarsCanvasLazy() {
@@ -24,15 +25,17 @@ export default function StarsCanvasLazy() {
     let frameId = 0;
     let width = 0;
     let height = 0;
+    let gradient: CanvasGradient | null = null;
     let stars: Star[] = [];
 
     const createStar = (): Star => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: Math.random() * 1.4 + 0.2,
-      alpha: Math.random() * 0.7 + 0.15,
-      twinkle: (Math.random() * 0.012 + 0.004) * (Math.random() > 0.5 ? 1 : -1),
-      drift: Math.random() * 0.08 + 0.02,
+      r: Math.random() * 1.8 + 0.2,
+      alpha: Math.random() * 0.65 + 0.2,
+      twinkle: (Math.random() * 0.02 + 0.006) * (Math.random() > 0.5 ? 1 : -1),
+      driftX: (Math.random() - 0.5) * 0.1,
+      driftY: Math.random() * 0.26 + 0.08,
     });
 
     const resize = () => {
@@ -46,12 +49,31 @@ export default function StarsCanvasLazy() {
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      gradient = ctx.createRadialGradient(
+        width * 0.5,
+        height * 0.35,
+        0,
+        width * 0.5,
+        height * 0.5,
+        Math.max(width, height)
+      );
+      gradient.addColorStop(0, "#09051d");
+      gradient.addColorStop(0.55, "#050214");
+      gradient.addColorStop(1, "#030014");
+
       const count = Math.max(140, Math.floor((width * height) / 9000));
       stars = Array.from({ length: count }, createStar);
     };
 
     const draw = () => {
+      if (!gradient) {
+        frameId = window.requestAnimationFrame(draw);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
       ctx.fillStyle = "#ffffff";
 
       for (const star of stars) {
@@ -60,7 +82,15 @@ export default function StarsCanvasLazy() {
           star.twinkle *= -1;
         }
 
-        star.y += star.drift;
+        star.x += star.driftX;
+        star.y += star.driftY;
+
+        if (star.x > width + 2) {
+          star.x = -2;
+        } else if (star.x < -2) {
+          star.x = width + 2;
+        }
+
         if (star.y > height + 2) {
           star.y = -2;
           star.x = Math.random() * width;
@@ -90,7 +120,8 @@ export default function StarsCanvasLazy() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[20]"
+      className="pointer-events-none fixed inset-0"
+      style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
     />
   );
 }
