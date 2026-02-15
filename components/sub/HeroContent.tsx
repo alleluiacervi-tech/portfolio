@@ -11,11 +11,17 @@ import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
 const PROFILE_NAME = "Alleluia";
-const PROFILE_ROLE = "Full Stack Software Engineer";
+const PROFILE_ROLE = "Software Engineer & Graphic Designer";
 const PROFILE_DESCRIPTION =
-  "I build performant web and mobile products with Next.js, React, Node.js, and TypeScript. I focus on clean architecture, polished UX, and reliable delivery.";
+  "I combine visual design craft with full-stack engineering to deliver polished, scalable digital products from concept to launch.";
 const PROFILE_PHOTO = "/alleluia.jpg";
-const PROFILE_HIGHLIGHTS = ["Next.js", "React", "TypeScript", "Node.js"];
+const PROFILE_HIGHLIGHTS = [
+  "UI/UX Design",
+  "Design Systems",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+];
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -40,7 +46,7 @@ const HeroContent = () => {
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
           <h1 className="Welcome-text text-[13px]">
-            Full Stack Developer Portfolio
+            Software Engineering & Design Portfolio
           </h1>
         </motion.div>
 
@@ -49,12 +55,11 @@ const HeroContent = () => {
           className="flex flex-col gap-6 mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span>
-            Building
+            Designing
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-              {" "}
-              reliable digital products{" "}
+              polished digital experiences
             </span>
-            from concept to launch
+            with reliable engineering
           </span>
         </motion.div>
 
