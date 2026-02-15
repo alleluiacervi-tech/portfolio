@@ -7,6 +7,11 @@ import Footer from "@/components/main/Footer";
 export const metadata: Metadata = {
   title: "Space Portfolio",
   description: "This is my portfolio",
+  icons: {
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

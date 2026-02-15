@@ -25,11 +25,11 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between px-4 md:px-6">
           <a href="#about-me" className="flex items-center gap-3">
             <Image
-              src="/NavLogo.png"
+              src="/logo.svg"
               alt="logo"
               width={42}
               height={42}
-              className="h-10 w-10 rounded-full border border-[#8b74ff]/40 bg-[#140b3c] p-1"
+              className="h-10 w-10 rounded-full border border-[#8b74ff]/40 bg-[#140b3c] p-1 object-contain"
             />
             <span className="hidden text-sm font-semibold tracking-wide text-gray-200 sm:block">
               Professional Portfolio
