@@ -162,29 +162,24 @@ const HeroContent = () => {
             </div>
           </div>
 
-          <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/50 p-5 shadow-lg shadow-[#2A0E61]/20 backdrop-blur-sm">
-            <div className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">
+          <div className="w-full px-2">
+            <div className="flex items-center gap-3">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
                 Added Design Logos
               </p>
-              <span className="rounded-full border border-[#8b74ff]/40 bg-[#8b74ff]/10 px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-[#d9d0ff]">
-                {CUSTOM_TOOL_LOGOS.length}
-              </span>
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
-            <div className="mt-4 grid grid-cols-4 gap-2">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-4">
               {CUSTOM_TOOL_LOGOS.map((logoSrc, index) => (
-                <div
+                <Image
                   key={logoSrc}
-                  className="flex h-14 items-center justify-center rounded-lg border border-white/10 bg-white/95 p-2"
-                >
-                  <Image
-                    src={logoSrc}
-                    alt={`added tool logo ${index + 1}`}
-                    width={36}
-                    height={36}
-                    className="h-9 w-9 object-contain"
-                  />
-                </div>
+                  src={logoSrc}
+                  alt={`added tool logo ${index + 1}`}
+                  width={38}
+                  height={38}
+                  className="h-9 w-9 object-contain opacity-85 transition-all duration-300 hover:scale-105 hover:opacity-100"
+                />
               ))}
             </div>
           </div>
