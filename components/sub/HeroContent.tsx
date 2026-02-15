@@ -85,14 +85,6 @@ const HeroContent = () => {
           >
             View Projects
           </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="py-2 px-6 text-sm border border-[#8b74ff]/70 rounded-lg text-white hover:bg-[#8b74ff]/20 transition-colors"
-          >
-            Download Resume
-          </a>
         </motion.div>
         <motion.div
           variants={prefersReducedMotion ? undefined : slideInFromLeft(1.1)}
