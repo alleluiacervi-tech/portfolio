@@ -160,11 +160,15 @@ const HeroContent = () => {
             </div>
           </div>
 
-          <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/50 p-5 shadow-lg shadow-[#2A0E61]/20 backdrop-blur-sm">
-            <p className="text-center text-xs uppercase tracking-[0.2em] text-[#b49bff]">
-              Core Tools
-            </p>
-            <div className="relative mt-4 h-[180px] w-full">
+          <div className="w-full px-2">
+            <div className="flex items-center gap-3">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
+                Core Tools
+              </p>
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+            </div>
+            <div className="relative mt-4 h-[160px] w-full">
               <Image
                 src="/mainIconsdark.svg"
                 alt="technology icons"
