@@ -22,18 +22,20 @@ const PROFILE_HIGHLIGHTS = [
   "TypeScript",
   "Node.js",
 ];
-const CUSTOM_TOOL_LOGOS = [
-  "/svg1.svg",
-  "/svg2.svg",
-  "/svg3.svg",
-  "/svg4.svg",
-  "/svg5.svg",
+const CTA_DESIGN_LOGOS = [
   "/svg6.svg",
   "/svg7.svg",
   "/svg8.svg",
   "/svg9.svg",
   "/svg11.svg",
   "/svg12.svg",
+];
+const RIGHT_DESIGN_LOGOS = [
+  "/svg1.svg",
+  "/svg2.svg",
+  "/svg3.svg",
+  "/svg4.svg",
+  "/svg5.svg",
 ];
 
 const HeroContent = () => {
@@ -101,6 +103,26 @@ const HeroContent = () => {
             Download Resume
           </a>
         </motion.div>
+        <motion.div
+          variants={slideInFromLeft(1.1)}
+          className="mt-2 w-full max-w-[600px]"
+        >
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
+            Design Logos
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
+            {CTA_DESIGN_LOGOS.map((logoSrc, index) => (
+              <Image
+                key={logoSrc}
+                src={logoSrc}
+                alt={`design logo ${index + 1}`}
+                width={36}
+                height={36}
+                className="h-9 w-9 object-contain opacity-85 transition-all duration-300 hover:scale-105 hover:opacity-100"
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       <motion.div
@@ -131,9 +153,6 @@ const HeroContent = () => {
               <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[#b49bff]">
                 {PROFILE_ROLE}
               </p>
-              <p className="mt-4 text-sm leading-6 text-gray-300">
-                {PROFILE_DESCRIPTION}
-              </p>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                 {PROFILE_HIGHLIGHTS.map((highlight) => (
                   <span
@@ -147,35 +166,20 @@ const HeroContent = () => {
             </div>
           </div>
 
-          <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/50 p-5 shadow-lg shadow-[#2A0E61]/20 backdrop-blur-sm">
-            <p className="text-center text-xs uppercase tracking-[0.2em] text-[#b49bff]">
-              Core Tools
-            </p>
-            <div className="relative mt-4 h-[180px] w-full">
-              <Image
-                src="/mainIconsdark.svg"
-                alt="technology icons"
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 90vw, 420px"
-              />
-            </div>
-          </div>
-
           <div className="w-full px-2">
             <div className="flex items-center gap-3">
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
               <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
-                Added Design Logos
+                Design Logos
               </p>
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-4">
-              {CUSTOM_TOOL_LOGOS.map((logoSrc, index) => (
+              {RIGHT_DESIGN_LOGOS.map((logoSrc, index) => (
                 <Image
                   key={logoSrc}
                   src={logoSrc}
-                  alt={`added tool logo ${index + 1}`}
+                  alt={`design logo ${index + 1}`}
                   width={38}
                   height={38}
                   className="h-9 w-9 object-contain opacity-85 transition-all duration-300 hover:scale-105 hover:opacity-100"
