@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   slideInFromLeft,
   slideInFromRight,
@@ -27,6 +27,30 @@ const DESIGN_TOOL_ROWS = [
   ["/svg5.svg", "/svg6.svg", "/svg7.svg"],
   ["/svg8.svg", "/svg9.svg", "/svg11.svg", "/svg12.svg"],
 ];
+const HERO_TITLE_VARIANTS: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.12,
+      delayChildren: 0.06,
+    },
+  },
+};
+const HERO_TITLE_LINE_VARIANTS: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -56,18 +80,23 @@ const HeroContent = () => {
           </h1>
         </motion.div>
 
-        <motion.div
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
-          className="flex flex-col gap-6 mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
+        <motion.h1
+          variants={prefersReducedMotion ? undefined : HERO_TITLE_VARIANTS}
+          className="mt-6 flex max-w-[600px] w-auto h-auto flex-col gap-2 text-3xl font-bold leading-tight text-white md:text-4xl md:leading-[1.08]"
         >
-          <span>
+          <motion.span variants={prefersReducedMotion ? undefined : HERO_TITLE_LINE_VARIANTS}>
             Designing
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-              polished digital experiences
-            </span>
+          </motion.span>
+          <motion.span
+            variants={prefersReducedMotion ? undefined : HERO_TITLE_LINE_VARIANTS}
+            className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500"
+          >
+            polished digital experiences
+          </motion.span>
+          <motion.span variants={prefersReducedMotion ? undefined : HERO_TITLE_LINE_VARIANTS}>
             with reliable engineering
-          </span>
-        </motion.div>
+          </motion.span>
+        </motion.h1>
 
         <motion.p
           variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
@@ -79,20 +108,16 @@ const HeroContent = () => {
           variants={prefersReducedMotion ? undefined : slideInFromLeft(1)}
           className="flex flex-wrap gap-3 md:gap-4"
         >
-          <a
+          <motion.a
             href="#projects"
             className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px] px-6"
+            whileHover={
+              prefersReducedMotion ? undefined : { y: -2, scale: 1.01 }
+            }
+            whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
           >
             View Projects
-          </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="py-2 px-6 text-sm border border-[#8b74ff]/70 rounded-lg text-white hover:bg-[#8b74ff]/20 transition-colors"
-          >
-            Download Resume
-          </a>
+          </motion.a>
         </motion.div>
         <motion.div
           variants={prefersReducedMotion ? undefined : slideInFromLeft(1.1)}

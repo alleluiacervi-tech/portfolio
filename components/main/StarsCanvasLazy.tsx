@@ -32,13 +32,13 @@ export default function StarsCanvasLazy() {
     let stars: Star[] = [];
 
     const createStar = (): Star => {
-      const isSlightlyLarger = Math.random() > 0.92;
+      const isSlightlyLarger = Math.random() > 0.97;
       return {
         x: Math.random() * width,
         y: Math.random() * height,
         r: isSlightlyLarger
-          ? Math.random() * 0.28 + 0.46
-          : Math.random() * 0.2 + 0.1,
+          ? Math.random() * 0.14 + 0.26
+          : Math.random() * 0.11 + 0.07,
         alpha: Math.random() * 0.6 + 0.25,
         alphaMin: 0.12 + Math.random() * 0.1,
         alphaMax: 0.78 + Math.random() * 0.2,
@@ -115,9 +115,9 @@ export default function StarsCanvasLazy() {
         ctx.fill();
 
         // Soft halo to make movement obvious without overpowering foreground content.
-        ctx.globalAlpha = star.alpha * 0.12;
+        ctx.globalAlpha = star.alpha * 0.08;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * 1.3, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r * 1.18, 0, Math.PI * 2);
         ctx.fill();
       }
 
