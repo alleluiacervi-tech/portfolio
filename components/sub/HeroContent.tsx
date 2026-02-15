@@ -22,19 +22,6 @@ const PROFILE_HIGHLIGHTS = [
   "TypeScript",
   "Node.js",
 ];
-const TOOL_LOGOS = [
-  "/svg1.svg",
-  "/svg2.svg",
-  "/svg3.svg",
-  "/svg4.svg",
-  "/svg5.svg",
-  "/svg6.svg",
-  "/svg7.svg",
-  "/svg8.svg",
-  "/svg9.svg",
-  "/svg11.svg",
-  "/svg12.svg",
-];
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -148,29 +135,17 @@ const HeroContent = () => {
           </div>
 
           <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/50 p-5 shadow-lg shadow-[#2A0E61]/20 backdrop-blur-sm">
-            <div className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">
-                Creative & Dev Toolkit
-              </p>
-              <span className="rounded-full border border-[#8b74ff]/40 bg-[#8b74ff]/10 px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-[#d9d0ff]">
-                {TOOL_LOGOS.length} Icons
-              </span>
-            </div>
-            <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-3">
-              {TOOL_LOGOS.map((logoSrc, index) => (
-                <div
-                  key={logoSrc}
-                  className="flex h-16 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-b from-white to-[#ece6ff] p-3 shadow-inner shadow-black/5 transition-transform duration-300 hover:-translate-y-0.5"
-                >
-                  <Image
-                    src={logoSrc}
-                    alt={`tool logo ${index + 1}`}
-                    width={42}
-                    height={42}
-                    className="h-10 w-10 object-contain"
-                  />
-                </div>
-              ))}
+            <p className="text-center text-xs uppercase tracking-[0.2em] text-[#b49bff]">
+              Core Tools
+            </p>
+            <div className="relative mt-4 h-[180px] w-full">
+              <Image
+                src="/mainIconsdark.svg"
+                alt="technology icons"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 90vw, 420px"
+              />
             </div>
           </div>
         </div>
