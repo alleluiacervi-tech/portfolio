@@ -22,6 +22,19 @@ const PROFILE_HIGHLIGHTS = [
   "TypeScript",
   "Node.js",
 ];
+const CUSTOM_TOOL_LOGOS = [
+  "/svg1.svg",
+  "/svg2.svg",
+  "/svg3.svg",
+  "/svg4.svg",
+  "/svg5.svg",
+  "/svg6.svg",
+  "/svg7.svg",
+  "/svg8.svg",
+  "/svg9.svg",
+  "/svg11.svg",
+  "/svg12.svg",
+];
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
@@ -146,6 +159,33 @@ const HeroContent = () => {
                 className="object-contain"
                 sizes="(max-width: 768px) 90vw, 420px"
               />
+            </div>
+          </div>
+
+          <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/50 p-5 shadow-lg shadow-[#2A0E61]/20 backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">
+                Added Design Logos
+              </p>
+              <span className="rounded-full border border-[#8b74ff]/40 bg-[#8b74ff]/10 px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-[#d9d0ff]">
+                {CUSTOM_TOOL_LOGOS.length}
+              </span>
+            </div>
+            <div className="mt-4 grid grid-cols-4 gap-2">
+              {CUSTOM_TOOL_LOGOS.map((logoSrc, index) => (
+                <div
+                  key={logoSrc}
+                  className="flex h-14 items-center justify-center rounded-lg border border-white/10 bg-white/95 p-2"
+                >
+                  <Image
+                    src={logoSrc}
+                    alt={`added tool logo ${index + 1}`}
+                    width={36}
+                    height={36}
+                    className="h-9 w-9 object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
