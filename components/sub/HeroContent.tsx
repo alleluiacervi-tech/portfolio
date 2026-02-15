@@ -108,9 +108,9 @@ const HeroContent = () => {
                     key={logoSrc}
                     src={logoSrc}
                     alt={`design logo ${rowIndex * 4 + index + 1}`}
-                    width={48}
-                    height={48}
-                    className="h-11 w-11 sm:h-12 sm:w-12 object-contain opacity-90 transition-all duration-300 hover:scale-105 hover:opacity-100"
+                    width={52}
+                    height={52}
+                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-90 transition-all duration-300 hover:scale-105 hover:opacity-100"
                   />
                 ))}
               </div>
@@ -168,7 +168,7 @@ const HeroContent = () => {
               </p>
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
-            <div className="relative mt-4 h-[220px] w-full">
+            <div className="relative mt-4 h-[240px] w-full">
               <Image
                 src="/mainIconsdark.svg"
                 alt="technology icons"
