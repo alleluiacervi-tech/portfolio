@@ -177,13 +177,16 @@ const HeroContent = () => {
               </p>
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
-            <div className="group relative mt-4 h-[240px] w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60" tabIndex={0}>
+            <div
+              className="group relative mt-4 h-[280px] md:h-[300px] w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60"
+              tabIndex={0}
+            >
               <Image
                 src="/mainIconsdark.svg"
                 alt="technology icons"
                 fill
-                className="object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
-                sizes="(max-width: 768px) 90vw, 420px"
+                className="object-contain scale-[1.16] md:scale-[1.2] opacity-75 saturate-50 transition-all duration-300 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
+                sizes="(max-width: 768px) 92vw, 460px"
               />
             </div>
           </div>
