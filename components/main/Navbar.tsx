@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <header className="fixed top-3 z-50 w-full px-4 md:px-8">
       <div className="mx-auto w-full max-w-7xl rounded-2xl border border-[#7042f861] bg-[#030014cc] shadow-[0_10px_35px_rgba(42,14,97,0.38)] backdrop-blur-xl">
-        <div className="flex h-14 items-center justify-between px-4 md:px-6">
+        <div className="flex h-16 items-center justify-between px-4 md:px-6">
           <a href="#about-me" className="flex items-center gap-3">
             <Image
               src="/logo.svg"
@@ -36,12 +36,12 @@ const Navbar = () => {
             </span>
           </a>
 
-          <nav className="hidden items-center gap-0 rounded-full border border-[#8b74ff]/35 bg-[#140b3c]/40 px-1 py-[2px] md:flex">
+          <nav className="hidden items-center rounded-full border border-[#8b74ff]/40 bg-[#140b3c]/45 px-2 py-1 md:flex">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none tracking-[0.08em] text-gray-200 transition-all duration-200 hover:bg-[#8b74ff]/20 hover:text-white"
+                className="rounded-full px-4 py-2 text-sm font-medium text-gray-200 transition-all duration-200 hover:bg-[#8b74ff]/20 hover:text-white"
               >
                 {link.label}
               </a>
