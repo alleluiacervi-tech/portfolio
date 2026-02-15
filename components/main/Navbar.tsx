@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "About", href: "#about-me" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 const SOCIAL_LINKS: Record<string, string> = {
   Discord: "https://discord.com",
