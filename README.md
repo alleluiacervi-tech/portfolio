@@ -31,13 +31,39 @@ Open `http://localhost:3000`.
 - `npm run build` - build production bundle
 - `npm run check` - lint + typecheck + build (full quality gate)
 
+## Docker
+
+Build image:
+
+```bash
+docker build -t spaceportfolio:latest .
+```
+
+Run container:
+
+```bash
+docker run --rm -p 3000:3000 spaceportfolio:latest
+```
+
+Run with Docker Compose:
+
+```bash
+docker compose up --build -d
+```
+
+Stop compose stack:
+
+```bash
+docker compose down
+```
+
 ## CI/CD Workflows
 
 Two workflows are configured in `.github/workflows`:
 
 1. `ci.yml` (`CI`)
    - Triggers on `pull_request` to `main` and `push` to `main`/`develop`
-   - Runs: install, lint, typecheck, build
+   - Runs: install, lint, typecheck, app build, Docker image build (no push)
    - Uses dependency caching and concurrency cancellation
 
 2. `cd-vercel.yml` (`CD - Vercel Production`)
@@ -56,4 +82,4 @@ Add these repository secrets:
 ## Recommended Repository Settings
 
 - Protect `main` branch
-- Require the `CI / Validate (lint, typecheck, build)` status check before merge
+- Require `CI / Validate (lint, typecheck, build)` and `CI / Docker Build` status checks before merge
