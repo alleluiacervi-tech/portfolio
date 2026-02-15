@@ -22,7 +22,7 @@ const PROFILE_HIGHLIGHTS = [
   "TypeScript",
   "Node.js",
 ];
-const DESIGN_LOGO_ROWS = [
+const DESIGN_TOOL_ROWS = [
   ["/svg1.svg", "/svg2.svg", "/svg3.svg", "/svg4.svg"],
   ["/svg5.svg", "/svg6.svg", "/svg7.svg"],
   ["/svg8.svg", "/svg9.svg", "/svg11.svg", "/svg12.svg"],
@@ -98,23 +98,35 @@ const HeroContent = () => {
           className="mt-2 w-full max-w-[600px]"
         >
           <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
-            Design Logos
+            Design Tools
           </p>
-          <div className="mt-4 space-y-4">
-            {DESIGN_LOGO_ROWS.map((row, rowIndex) => (
-              <div key={`row-${rowIndex}`} className="flex items-center justify-center gap-7 sm:gap-8">
-                {row.map((logoSrc, index) => (
-                  <Image
-                    key={logoSrc}
-                    src={logoSrc}
-                    alt={`design logo ${rowIndex * 4 + index + 1}`}
-                    width={52}
-                    height={52}
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-90 transition-all duration-300 hover:scale-105 hover:opacity-100"
-                  />
-                ))}
-              </div>
-            ))}
+          <div className="relative mt-4 w-full overflow-hidden rounded-2xl">
+            <div className="pointer-events-none absolute inset-0">
+              <Image
+                src="/mainIconsdark.svg"
+                alt=""
+                fill
+                aria-hidden
+                className="object-contain opacity-45"
+                sizes="(max-width: 768px) 90vw, 600px"
+              />
+            </div>
+            <div className="relative z-10 space-y-5 py-5">
+              {DESIGN_TOOL_ROWS.map((row, rowIndex) => (
+                <div key={`row-${rowIndex}`} className="flex items-center justify-center gap-7 sm:gap-8">
+                  {row.map((logoSrc, index) => (
+                    <Image
+                      key={logoSrc}
+                      src={logoSrc}
+                      alt={`design tool ${rowIndex * 4 + index + 1}`}
+                      width={52}
+                      height={52}
+                      className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-95 transition-all duration-300 hover:scale-105 hover:opacity-100"
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
