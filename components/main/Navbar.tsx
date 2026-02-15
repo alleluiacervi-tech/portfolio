@@ -32,7 +32,7 @@ const Navbar = () => {
               className="h-10 w-10 rounded-full border border-[#8b74ff]/40 bg-[#140b3c] p-1 object-contain"
             />
             <span className="hidden text-sm font-semibold tracking-wide text-gray-200 sm:block">
-              Professional Portfolio
+              Alleluia Cervi
             </span>
           </a>
 

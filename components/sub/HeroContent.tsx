@@ -48,11 +48,11 @@ const HeroContent = () => {
       <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
         <motion.div
           variants={prefersReducedMotion ? undefined : slideInFromTop}
-          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+          className="Welcome-box border border-[#8b74ff]/45 bg-[#140b3c]/45 px-4 py-2 opacity-[0.95]"
         >
-          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-          <h1 className="Welcome-text text-[13px]">
-            Software Engineering & Design Portfolio
+          <SparklesIcon className="mr-2 h-4 w-4 text-[#b49bff]" />
+          <h1 className="Welcome-text text-[11px] uppercase tracking-[0.14em]">
+            Software Engineer | Graphic Designer
           </h1>
         </motion.div>
 

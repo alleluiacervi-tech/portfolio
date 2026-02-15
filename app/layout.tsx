@@ -5,8 +5,9 @@ import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
 
 export const metadata: Metadata = {
-  title: "Space Portfolio",
-  description: "This is my portfolio",
+  title: "Alleluia Cervi | Software Engineer & Graphic Designer",
+  description:
+    "Professional portfolio of Alleluia Cervi, a software engineer and graphic designer building polished, scalable digital products.",
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",
