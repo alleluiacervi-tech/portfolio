@@ -43,16 +43,16 @@ const HeroContent = () => {
     <motion.div
       initial={prefersReducedMotion ? undefined : "hidden"}
       animate={prefersReducedMotion ? undefined : "visible"}
-      className="flex flex-col-reverse md:flex-row items-center justify-center gap-12 px-6 md:px-20 mt-40 w-full z-[20]"
+      className="mt-28 z-[20] flex w-full flex-col-reverse items-center justify-center gap-12 px-6 md:mt-32 md:flex-row md:px-20"
     >
-      <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
+      <div className="m-auto flex h-full w-full flex-col justify-center gap-5 text-start">
         <motion.div
           variants={prefersReducedMotion ? undefined : slideInFromTop}
-          className="Welcome-box border border-[#8b74ff]/45 bg-[#140b3c]/45 px-4 py-2 opacity-[0.95]"
+          className="inline-flex w-fit items-center rounded-full border border-[#8b74ff]/35 bg-[#10082c]/80 px-3 py-1.5 shadow-[0_8px_24px_rgba(42,14,97,0.26)] backdrop-blur-sm"
         >
-          <SparklesIcon className="mr-2 h-4 w-4 text-[#b49bff]" />
-          <h1 className="Welcome-text text-[11px] uppercase tracking-[0.14em]">
-            Software Engineer | Graphic Designer
+          <SparklesIcon className="mr-1.5 h-3.5 w-3.5 text-[#b49bff]" />
+          <h1 className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#d8d0ff] md:text-[11px]">
+            Software Engineer
           </h1>
         </motion.div>
 
