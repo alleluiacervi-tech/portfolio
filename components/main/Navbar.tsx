@@ -36,12 +36,12 @@ const Navbar = () => {
             </span>
           </a>
 
-          <nav className="hidden items-center gap-0.5 rounded-full border border-[#8b74ff]/35 bg-[#140b3c]/40 px-1.5 py-0.5 md:flex">
+          <nav className="hidden items-center gap-0 rounded-full border border-[#8b74ff]/35 bg-[#140b3c]/40 px-1 py-[2px] md:flex">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-2.5 py-1 text-xs font-medium tracking-wide text-gray-200 transition-all duration-200 hover:bg-[#8b74ff]/20 hover:text-white"
+                className="rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none tracking-[0.08em] text-gray-200 transition-all duration-200 hover:bg-[#8b74ff]/20 hover:text-white"
               >
                 {link.label}
               </a>
