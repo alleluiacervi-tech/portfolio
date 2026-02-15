@@ -1,0 +1,81 @@
+name: CD - Vercel Production
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-vercel-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Vercel Production
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+    env:
+      CI: true
+      NEXT_TELEMETRY_DISABLED: 1
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Validate Vercel secrets
+        run: |
+          test -n "$VERCEL_TOKEN" || (echo "Missing VERCEL_TOKEN secret" && exit 1)
+          test -n "$VERCEL_ORG_ID" || (echo "Missing VERCEL_ORG_ID secret" && exit 1)
+          test -n "$VERCEL_PROJECT_ID" || (echo "Missing VERCEL_PROJECT_ID secret" && exit 1)
+
+      - name: Checkout (workflow_run commit)
+        if: github.event_name == 'workflow_run'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Checkout (manual dispatch branch)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build deployment artifacts
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy to Vercel
+        id: deploy
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "deployment_url=$DEPLOYMENT_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Publish deployment summary
+        run: |
+          echo "### Production Deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "- URL: ${{ steps.deploy.outputs.deployment_url }}" >> "$GITHUB_STEP_SUMMARY"

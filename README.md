@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Space Portfolio
 
-## Getting Started
+Professional portfolio built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## Requirements
+
+- Node.js `>= 20.9.0`
+- npm `>= 9`
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `npm run dev` - start local development server
+- `npm run lint` - run ESLint
+- `npm run typecheck` - run TypeScript type checking
+- `npm run build` - build production bundle
+- `npm run check` - lint + typecheck + build (full quality gate)
 
-## Learn More
+## CI/CD Workflows
 
-To learn more about Next.js, take a look at the following resources:
+Two workflows are configured in `.github/workflows`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. `ci.yml` (`CI`)
+   - Triggers on `pull_request` to `main` and `push` to `main`/`develop`
+   - Runs: install, lint, typecheck, build
+   - Uses dependency caching and concurrency cancellation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. `cd-vercel.yml` (`CD - Vercel Production`)
+   - Triggers after successful `CI` run on `main`
+   - Also supports manual run with `workflow_dispatch`
+   - Builds and deploys to Vercel production
 
-## Deploy on Vercel
+## Required GitHub Secrets (for CD)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Add these repository secrets:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+## Recommended Repository Settings
+
+- Protect `main` branch
+- Require the `CI / Validate (lint, typecheck, build)` status check before merge
