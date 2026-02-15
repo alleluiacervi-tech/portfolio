@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   slideInFromLeft,
   slideInFromRight,
@@ -30,6 +30,7 @@ const DESIGN_TOOL_ROWS = [
 
 const HeroContent = () => {
   const [showProfilePhoto, setShowProfilePhoto] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
   const profileInitials =
     PROFILE_NAME.split(" ")
       .filter(Boolean)
@@ -40,13 +41,13 @@ const HeroContent = () => {
 
   return (
     <motion.div
-      initial="hidden"
-      animate="visible"
+      initial={prefersReducedMotion ? undefined : "hidden"}
+      animate={prefersReducedMotion ? undefined : "visible"}
       className="flex flex-col-reverse md:flex-row items-center justify-center gap-12 px-6 md:px-20 mt-40 w-full z-[20]"
     >
       <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
         <motion.div
-          variants={slideInFromTop}
+          variants={prefersReducedMotion ? undefined : slideInFromTop}
           className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
@@ -56,7 +57,7 @@ const HeroContent = () => {
         </motion.div>
 
         <motion.div
-          variants={slideInFromLeft(0.5)}
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
           className="flex flex-col gap-6 mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span>
@@ -69,14 +70,14 @@ const HeroContent = () => {
         </motion.div>
 
         <motion.p
-          variants={slideInFromLeft(0.8)}
-          className="text-lg text-gray-400 my-5 max-w-[600px]"
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
+          className="text-lg text-gray-400 mt-4 mb-3 md:my-5 max-w-[600px]"
         >
           {PROFILE_DESCRIPTION}
         </motion.p>
         <motion.div
-          variants={slideInFromLeft(1)}
-          className="flex flex-wrap gap-4"
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(1)}
+          className="flex flex-wrap gap-3 md:gap-4"
         >
           <a
             href="#projects"
@@ -94,24 +95,32 @@ const HeroContent = () => {
           </a>
         </motion.div>
         <motion.div
-          variants={slideInFromLeft(1.1)}
-          className="mt-2 w-full max-w-[600px]"
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(1.1)}
+          className="mt-1 md:mt-2 w-full max-w-[600px]"
         >
           <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
             Design Tools
           </p>
-          <div className="mt-4 space-y-5">
+          <div className="mt-3 md:mt-4 space-y-3 md:space-y-5">
             {DESIGN_TOOL_ROWS.map((row, rowIndex) => (
-              <div key={`row-${rowIndex}`} className="flex items-center justify-center gap-7 sm:gap-8">
-                {row.map((logoSrc, index) => (
-                  <Image
+              <div
+                key={`row-${rowIndex}`}
+                className="flex items-center justify-center gap-5 sm:gap-7 md:gap-8"
+              >
+                {row.map((logoSrc) => (
+                  <span
                     key={logoSrc}
-                    src={logoSrc}
-                    alt={`design tool ${rowIndex * 4 + index + 1}`}
-                    width={52}
-                    height={52}
-                    className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-95 transition-all duration-300 hover:scale-105 hover:opacity-100"
-                  />
+                    tabIndex={0}
+                    className="group inline-flex items-center justify-center rounded-md outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60"
+                  >
+                    <Image
+                      src={logoSrc}
+                      alt={`design tool ${logoSrc.replace("/svg", "").replace(".svg", "")}`}
+                      width={52}
+                      height={52}
+                      className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:scale-105 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
+                    />
+                  </span>
                 ))}
               </div>
             ))}
@@ -120,7 +129,7 @@ const HeroContent = () => {
       </div>
 
       <motion.div
-        variants={slideInFromRight(0.8)}
+        variants={prefersReducedMotion ? undefined : slideInFromRight(0.8)}
         className="w-full h-full flex justify-center items-center"
       >
         <div className="w-full max-w-[420px] flex flex-col gap-6">
@@ -168,12 +177,12 @@ const HeroContent = () => {
               </p>
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
-            <div className="relative mt-4 h-[240px] w-full">
+            <div className="group relative mt-4 h-[240px] w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60" tabIndex={0}>
               <Image
                 src="/mainIconsdark.svg"
                 alt="technology icons"
                 fill
-                className="object-contain"
+                className="object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
                 sizes="(max-width: 768px) 90vw, 420px"
               />
             </div>
