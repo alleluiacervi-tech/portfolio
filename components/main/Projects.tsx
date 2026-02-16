@@ -3,19 +3,19 @@ import ProjectCard from "../sub/ProjectCard";
 
 const DESIGN_PROJECTS = [
   {
-    src: "/Design1.jpg",
-    gallery: ["/Design1.jpg", "/Design2.jpeg", "/Design4.jpeg"],
-    title: "Fintech Mobile Experience Suite",
-    description:
-      "A focused UI direction for trading and wallet products with clear charts, streamlined actions, and consistent interaction flow.",
-    category: "Product UI Direction",
-  },
-  {
     src: "/Design3.jpg",
     title: "Operations Analytics Dashboard",
     description:
       "A dark dashboard concept built for quick monitoring, KPI visibility, and structured data scanning across teams.",
     category: "Dashboard Systems",
+  },
+  {
+    src: "/Design1.jpg",
+    gallery: ["/Design1.jpg", "/Design2.jpeg", "/Design4.jpeg"],
+    title: "Fintech Mobile Experience Suite",
+    description:
+      "A focused mobile app UI direction for trading and wallet products with clear charts, streamlined actions, and consistent interaction flow.",
+    category: "Product UI Direction",
   },
   {
     src: "/brand.jpg",
