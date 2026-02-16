@@ -22,7 +22,7 @@ const ProjectCard = ({
   category,
   featured = false,
   className = "",
-  rotationMs = 3000,
+  rotationMs = 4500,
 }: Props) => {
   const imageSources = useMemo(() => {
     const uniqueSources = [src, ...gallery].filter(
@@ -33,14 +33,34 @@ const ProjectCard = ({
   }, [src, gallery]);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const hasImageRotation = imageSources.length > 1;
+  const shouldPauseRotation = isHovered || isFocused;
+
+  const showPreviousImage = () => {
+    setActiveImageIndex((currentIndex) => {
+      if (currentIndex === 0) {
+        return imageSources.length - 1;
+      }
+
+      return currentIndex - 1;
+    });
+  };
+
+  const showNextImage = () => {
+    setActiveImageIndex((currentIndex) => {
+      const nextIndex = currentIndex + 1;
+      return nextIndex >= imageSources.length ? 0 : nextIndex;
+    });
+  };
 
   useEffect(() => {
     setActiveImageIndex(0);
   }, [imageSources]);
 
   useEffect(() => {
-    if (!hasImageRotation) {
+    if (!hasImageRotation || shouldPauseRotation) {
       return;
     }
 
@@ -54,7 +74,7 @@ const ProjectCard = ({
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [hasImageRotation, imageSources.length, rotationMs]);
+  }, [hasImageRotation, imageSources.length, rotationMs, shouldPauseRotation]);
 
   const cardClassName = [
     "group relative overflow-hidden rounded-2xl border bg-[#0b0426]/65 backdrop-blur-sm transition-all duration-300",
@@ -67,7 +87,17 @@ const ProjectCard = ({
     .join(" ");
 
   return (
-    <article className={cardClassName}>
+    <article
+      className={cardClassName}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocusCapture={() => setIsFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsFocused(false);
+        }
+      }}
+    >
       <div className="relative aspect-[16/9] overflow-hidden">
         {imageSources.map((imageSource, index) => (
           <Image
@@ -82,6 +112,26 @@ const ProjectCard = ({
           />
         ))}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/25 to-transparent" />
+        {hasImageRotation ? (
+          <div className="absolute inset-y-0 left-0 right-0 z-[2] flex items-center justify-between px-3">
+            <button
+              type="button"
+              onClick={showPreviousImage}
+              aria-label={`Previous image for ${title}`}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-0 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 group-hover:opacity-100 group-focus-within:opacity-100"
+            >
+              &#8592;
+            </button>
+            <button
+              type="button"
+              onClick={showNextImage}
+              aria-label={`Next image for ${title}`}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-0 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 group-hover:opacity-100 group-focus-within:opacity-100"
+            >
+              &#8594;
+            </button>
+          </div>
+        ) : null}
         {hasImageRotation ? (
           <div className="pointer-events-none absolute bottom-3 left-3 flex gap-1.5">
             {imageSources.map((imageSource, index) => (
