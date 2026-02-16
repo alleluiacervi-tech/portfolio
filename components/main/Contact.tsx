@@ -49,13 +49,13 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-4 md:px-10"
+      className="section-shell pb-20 pt-6 md:pb-24"
     >
       <div className="mb-10 text-center">
-        <h2 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+        <h2 className="section-title">
           Contact Me
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-gray-300">
+        <p className="section-intro mx-auto max-w-2xl">
           Have a project in mind or want to collaborate? Share a few details and I
           will get back to you quickly.
         </p>
@@ -67,7 +67,7 @@ const Contact = () => {
           whileInView={prefersReducedMotion ? undefined : "visible"}
           viewport={{ once: true, amount: 0.3 }}
           variants={prefersReducedMotion ? undefined : slideInFromLeft(0.1)}
-          className="rounded-2xl border border-[#7042f861] bg-[#0b0426]/60 p-6 shadow-xl shadow-[#2A0E61]/30 backdrop-blur-sm"
+          className="panel-card panel-card-hover"
         >
           <h3 className="text-2xl font-semibold text-white">Lets build something great.</h3>
           <p className="mt-3 text-sm text-gray-300">
@@ -114,7 +114,7 @@ const Contact = () => {
           whileInView={prefersReducedMotion ? undefined : "visible"}
           viewport={{ once: true, amount: 0.3 }}
           variants={prefersReducedMotion ? undefined : slideInFromRight(0.1)}
-          className="rounded-2xl border border-[#7042f861] bg-[#0b0426]/60 p-6 shadow-xl shadow-[#2A0E61]/30 backdrop-blur-sm"
+          className="panel-card panel-card-hover"
         >
           <div className="space-y-4">
             <div>
@@ -129,7 +129,7 @@ const Contact = () => {
                 onChange={(event) =>
                   setFormState((prev) => ({ ...prev, name: event.target.value }))
                 }
-                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-gray-400 focus:border-[#b49bff]"
+                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-gray-400 focus:border-[#b49bff]"
                 placeholder="Your name"
               />
             </div>
@@ -146,7 +146,7 @@ const Contact = () => {
                 onChange={(event) =>
                   setFormState((prev) => ({ ...prev, email: event.target.value }))
                 }
-                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-gray-400 focus:border-[#b49bff]"
+                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-gray-400 focus:border-[#b49bff]"
                 placeholder="you@example.com"
               />
             </div>
@@ -162,7 +162,7 @@ const Contact = () => {
                   setFormState((prev) => ({ ...prev, message: event.target.value }))
                 }
                 rows={6}
-                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-gray-400 focus:border-[#b49bff]"
+                className="w-full rounded-lg border border-[#8b74ff]/40 bg-[#140b3c]/70 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-gray-400 focus:border-[#b49bff]"
                 placeholder="Tell me about your project..."
               />
             </div>
@@ -172,7 +172,7 @@ const Contact = () => {
             <p className="text-xs text-[#d8d0ff]">{feedbackMessage}</p>
             <button
               type="submit"
-              className="button-primary rounded-lg px-6 py-2 text-sm font-medium text-white"
+              className="button-primary rounded-lg px-6 py-2 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5"
             >
               Send Message
             </button>
