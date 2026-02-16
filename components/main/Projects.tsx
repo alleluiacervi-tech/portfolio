@@ -35,16 +35,16 @@ const DEVELOPMENT_PROJECTS = [
       "A blockchain product concept showing distributed architecture, secure transaction routing, and network-level coordination.",
   },
   {
-    src: "/CardImage.png",
-    title: "Interactive Website Cards",
+    src: "/forex.jpg",
+    title: "Forex Trading Platform",
     description:
-      "A responsive card interface system with layered interactions, smooth transitions, and accessibility-focused behavior.",
+      "A trading-focused digital product direction for market tracking, chart readability, and quick transaction decision flow.",
   },
   {
-    src: "/SpaceWebsite.png",
-    title: "Space Themed Website",
+    src: "/smart.jpg",
+    title: "Smart Cooperative Platform",
     description:
-      "An immersive web experience blending motion, storytelling, and scalable front-end architecture with performance in mind.",
+      "A cooperative platform built for Rwandan cooperatives to manage funds transparently, improve accountability, and reduce embezzlement risk.",
   },
 ];
 
@@ -93,6 +93,17 @@ const Projects = () => {
               category="Software Development"
             />
           ))}
+        </div>
+        <div className="panel-card mt-10 md:mt-12">
+          <p className="section-eyebrow">Private Projects</p>
+          <h3 className="mt-3 text-xl font-semibold text-white md:text-2xl">
+            And Many Other Private Projects
+          </h3>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+            Beyond the public portfolio, I have delivered multiple confidential
+            products for organizations and teams, including internal financial
+            workflows, operations platforms, and secure management dashboards.
+          </p>
         </div>
       </div>
     </section>
