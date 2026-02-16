@@ -49,7 +49,7 @@
   }
 
   .section-intro {
-    @apply mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base;
+    @apply mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base;
   }
 
   .panel-card {
@@ -125,4 +125,21 @@
 }
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+
+.project-card-title {
+  display: -webkit-box;
+  overflow: hidden;
+  text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.project-card-description {
+  display: -webkit-box;
+  min-height: 4.5rem;
+  overflow: hidden;
+  text-wrap: pretty;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }

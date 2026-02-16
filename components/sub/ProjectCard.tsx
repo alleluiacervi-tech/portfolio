@@ -77,7 +77,7 @@ const ProjectCard = ({
   }, [hasImageRotation, imageSources.length, rotationMs, shouldPauseRotation]);
 
   const cardClassName = [
-    "group relative overflow-hidden rounded-2xl border bg-[#0b0426]/65 backdrop-blur-sm transition-all duration-300",
+    "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-[#0b0426]/65 backdrop-blur-sm transition-all duration-300",
     featured
       ? "border-[#8b74ff]/70 shadow-[0_18px_45px_rgba(42,14,97,0.38)] hover:-translate-y-1.5 hover:shadow-[0_26px_60px_rgba(42,14,97,0.46)]"
       : "border-[#4e2a96]/70 shadow-[0_14px_34px_rgba(42,14,97,0.26)] hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_22px_52px_rgba(42,14,97,0.4)]",
@@ -98,14 +98,14 @@ const ProjectCard = ({
         }
       }}
     >
-      <div className="relative aspect-[16/9] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
         {imageSources.map((imageSource, index) => (
           <Image
             key={`${title}-${imageSource}`}
             src={imageSource}
             alt={title}
             fill
-            sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 30vw"
+            sizes="(max-width: 768px) 92vw, (max-width: 1280px) 48vw, 32vw"
             className={`h-full w-full object-cover object-center transition-[opacity,transform] duration-700 group-hover:scale-[1.02] ${
               index === activeImageIndex ? "opacity-100" : "opacity-0"
             }`}
@@ -118,7 +118,7 @@ const ProjectCard = ({
               type="button"
               onClick={showPreviousImage}
               aria-label={`Previous image for ${title}`}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-0 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 group-hover:opacity-100 group-focus-within:opacity-100"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-100 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
             >
               &#8592;
             </button>
@@ -126,7 +126,7 @@ const ProjectCard = ({
               type="button"
               onClick={showNextImage}
               aria-label={`Next image for ${title}`}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-0 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 group-hover:opacity-100 group-focus-within:opacity-100"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-[#0a0424]/70 text-sm text-white opacity-100 transition-all duration-300 hover:border-white/55 hover:bg-[#0a0424]/90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b49bff]/70 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
             >
               &#8594;
             </button>
@@ -146,20 +146,20 @@ const ProjectCard = ({
         ) : null}
       </div>
 
-      <div className="relative space-y-2.5 p-4 md:p-5">
+      <div className="relative flex flex-1 flex-col space-y-2.5 p-4 md:p-5">
         {category ? (
-          <p className="text-[11px] uppercase tracking-[0.18em] text-[#b49bff]">
+          <p className="text-[10px] uppercase tracking-[0.14em] text-[#b49bff]">
             {category}
           </p>
         ) : null}
         <h3
           className={`text-white ${
             featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"
-          } font-semibold leading-snug`}
+          } project-card-title font-semibold leading-snug`}
         >
           {title}
         </h3>
-        <p className="text-sm leading-relaxed text-slate-300">
+        <p className="project-card-description text-sm leading-relaxed text-slate-300">
           {description}
         </p>
       </div>

@@ -7,14 +7,14 @@ const DESIGN_PROJECTS = [
     gallery: ["/Design1.jpg", "/Design2.jpeg", "/Design4.jpeg"],
     title: "Fintech Mobile Experience Suite",
     description:
-      "A focused UI direction for trading and wallet products, combining clear chart readability, streamlined actions, and consistent interaction patterns.",
+      "A focused UI direction for trading and wallet products with clear charts, streamlined actions, and consistent interaction flow.",
     category: "Product UI Direction",
   },
   {
     src: "/Design3.jpg",
     title: "Operations Analytics Dashboard",
     description:
-      "A dark-themed dashboard system built for quick monitoring, KPI visibility, and structured information scanning across business units.",
+      "A dark dashboard concept built for quick monitoring, KPI visibility, and structured data scanning across teams.",
     category: "Dashboard Systems",
   },
   {
@@ -22,7 +22,7 @@ const DESIGN_PROJECTS = [
     gallery: ["/brand.jpg", "/brand1.jpeg"],
     title: "Brand Identity Applications",
     description:
-      "A rotating showcase of brand collaterals, built to demonstrate logo flexibility, merchandise consistency, and real-world identity application.",
+      "A rotating brand showcase demonstrating logo flexibility, merchandise consistency, and real-world identity application.",
     category: "Brand Systems",
   },
 ];
@@ -32,19 +32,19 @@ const DEVELOPMENT_PROJECTS = [
     src: "/blockchain.jpg",
     title: "Blockchain Network Platform Concept",
     description:
-      "A blockchain-focused product concept illustrating distributed architecture, secure transaction routes, and network-level system communication.",
+      "A blockchain product concept showing distributed architecture, secure transaction routing, and network-level coordination.",
   },
   {
     src: "/CardImage.png",
     title: "Interactive Website Cards",
     description:
-      "A responsive component suite with layered card interactions, smooth transitions, and accessibility-focused behavior for modern web interfaces.",
+      "A responsive card interface system with layered interactions, smooth transitions, and accessibility-focused behavior.",
   },
   {
     src: "/SpaceWebsite.png",
     title: "Space Themed Website",
     description:
-      "An immersive website experience blending motion, storytelling, and scalable front-end architecture for performance-oriented delivery.",
+      "An immersive web experience blending motion, storytelling, and scalable front-end architecture with performance in mind.",
   },
 ];
 
@@ -58,7 +58,7 @@ const Projects = () => {
           A selection of visual and brand-focused work highlighting strategy,
           structure, and polished execution before implementation.
         </p>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {DESIGN_PROJECTS.map((project) => (
             <ProjectCard
               key={project.title}
@@ -83,7 +83,7 @@ const Projects = () => {
           Production-oriented builds where software architecture and performance
           support real product needs.
         </p>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {DEVELOPMENT_PROJECTS.map((project) => (
             <ProjectCard
               key={project.title}
