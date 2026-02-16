@@ -3,46 +3,27 @@ import ProjectCard from "../sub/ProjectCard";
 
 const DESIGN_PROJECTS = [
   {
-    src: "/Design4.jpeg",
-    title: "Forex App Interface Direction",
-    description:
-      "A mobile-first trading interface concept balancing bold visual hierarchy, real-time data readability, and action-focused interaction patterns.",
-    category: "Fintech Product Design",
-  },
-  {
     src: "/Design1.jpg",
-    title: "Crypto Trading Mobile UI",
+    gallery: ["/Design1.jpg", "/Design2.jpeg", "/Design4.jpeg"],
+    title: "Fintech Mobile Experience Suite",
     description:
-      "A clean and intuitive chart-first layout designed to support high-frequency decision making with clear buy and sell pathways.",
-    category: "Mobile Experience Design",
-  },
-  {
-    src: "/Design2.jpeg",
-    title: "Digital Wallet Dashboard",
-    description:
-      "A polished dual-screen mobile dashboard that combines account management, transfer actions, and performance metrics in a cohesive flow.",
-    category: "UI/UX Design",
+      "A focused UI direction for trading and wallet products, combining clear chart readability, streamlined actions, and consistent interaction patterns.",
+    category: "Product UI Direction",
   },
   {
     src: "/Design3.jpg",
     title: "Operations Analytics Dashboard",
     description:
       "A dark-themed dashboard system built for quick monitoring, KPI visibility, and structured information scanning across business units.",
-    category: "Interface Systems",
+    category: "Dashboard Systems",
   },
   {
     src: "/brand.jpg",
-    title: "Monochrome Brand Merch Collection",
+    gallery: ["/brand.jpg", "/brand1.jpeg"],
+    title: "Brand Identity Applications",
     description:
-      "A full merchandise mockup set demonstrating logo consistency, print hierarchy, and practical brand usage across physical touchpoints.",
-    category: "Brand Identity",
-  },
-  {
-    src: "/brand1.jpeg",
-    title: "Dexlomri Brand Application Kit",
-    description:
-      "A vibrant brand application study spanning apparel, accessories, and digital product surfaces with unified visual language.",
-    category: "Brand Application",
+      "A rotating showcase of brand collaterals, built to demonstrate logo flexibility, merchandise consistency, and real-world identity application.",
+    category: "Brand Systems",
   },
 ];
 
@@ -77,16 +58,15 @@ const Projects = () => {
           A selection of visual and brand-focused work highlighting strategy,
           structure, and polished execution before implementation.
         </p>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {DESIGN_PROJECTS.map((project, index) => (
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {DESIGN_PROJECTS.map((project) => (
             <ProjectCard
               key={project.title}
               src={project.src}
+              gallery={project.gallery}
               title={project.title}
               description={project.description}
               category={project.category}
-              featured
-              className={index === 0 ? "md:col-span-2" : ""}
             />
           ))}
         </div>
