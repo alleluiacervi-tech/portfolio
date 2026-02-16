@@ -1,59 +1,91 @@
+import {
+  Backend_skill,
+  Frontend_skill,
+  Full_stack,
+  Other_skill,
+  Skill_data,
+} from "@/constants";
 import React from "react";
-
-const DESIGN_SKILLS = [
-  "Branding",
-  "Logo Systems",
-  "UI Design",
-  "Typography",
-  "Visual Systems",
-];
-
-const DIGITAL_SKILLS = [
-  "Frontend Development",
-  "Interface Systems",
-  "Web Architecture",
-];
+import SkillDataProvider from "../sub/SkillDataProvider";
+import SkillText from "../sub/SkillText";
 
 const Skills = () => {
   return (
     <section
       id="skills"
-      className="mx-auto w-full max-w-6xl px-6 md:px-10"
+      className="flex flex-col items-center justify-center gap-3 h-full relative overflow-hidden pb-80 py-20"
+      style={{ transform: "scale(0.9" }}
     >
-      <div className="rounded-2xl border border-[#7042f861] bg-[#0b0426]/60 p-8 shadow-xl shadow-[#2A0E61]/20 backdrop-blur-sm md:p-10">
-        <p className="text-xs uppercase tracking-[0.22em] text-[#b49bff]">Skills</p>
-        <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-          Structured Capabilities
-        </h2>
+      <SkillText />
 
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
-          <div>
-            <h3 className="text-lg font-semibold text-white">Design</h3>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {DESIGN_SKILLS.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-[#8b74ff]/50 bg-[#8b74ff]/10 px-3 py-1 text-sm text-[#e8e1ff]"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+        {Skill_data.map((image, index) => (
+          <SkillDataProvider
+            key={index}
+            src={image.Image}
+            width={image.width}
+            height={image.height}
+            index={index}
+          />
+        ))}
+      </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-white">Digital</h3>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {DIGITAL_SKILLS.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-cyan-400/45 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-100"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+        {Frontend_skill.map((image, index) => (
+          <SkillDataProvider
+            key={index}
+            src={image.Image}
+            width={image.width}
+            height={image.height}
+            index={index}
+          />
+        ))}
+      </div>
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+        {Backend_skill.map((image, index) => (
+          <SkillDataProvider
+            key={index}
+            src={image.Image}
+            width={image.width}
+            height={image.height}
+            index={index}
+          />
+        ))}
+      </div>
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+        {Full_stack.map((image, index) => (
+          <SkillDataProvider
+            key={index}
+            src={image.Image}
+            width={image.width}
+            height={image.height}
+            index={index}
+          />
+        ))}
+      </div>
+      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
+        {Other_skill.map((image, index) => (
+          <SkillDataProvider
+            key={index}
+            src={image.Image}
+            width={image.width}
+            height={image.height}
+            index={index}
+          />
+        ))}
+      </div>
+
+      <div className="w-full h-full absolute">
+        <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-cover">
+          <video
+            className="w-full h-auto"
+            preload="false"
+            playsInline
+            loop
+            muted
+            autoPlay
+            src="/cards-video.webm"
+          />
         </div>
       </div>
     </section>

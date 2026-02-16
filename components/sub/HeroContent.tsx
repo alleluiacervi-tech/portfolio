@@ -1,46 +1,190 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  slideInFromLeft,
+  slideInFromRight,
+  slideInFromTop,
+} from "@/utils/motion";
+import { SparklesIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+
+const PROFILE_NAME = "Alleluia Cervi";
+const PROFILE_ROLE = "Software Engineer & Graphic Designer";
+const PROFILE_DESCRIPTION =
+  "I combine visual design craft with full-stack engineering to deliver polished, scalable digital products from concept to launch.";
+const PROFILE_PHOTO = "/alleluia.jpg";
+const PROFILE_HIGHLIGHTS = [
+  "UI/UX Design",
+  "Design Systems",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+];
+const DESIGN_TOOL_ROWS = [
+  ["/svg1.svg", "/svg2.svg", "/svg3.svg", "/svg4.svg"],
+  ["/svg5.svg", "/svg6.svg", "/svg7.svg"],
+  ["/svg8.svg", "/svg9.svg", "/svg11.svg", "/svg12.svg"],
+];
 
 const HeroContent = () => {
+  const [showProfilePhoto, setShowProfilePhoto] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
+  const profileInitials =
+    PROFILE_NAME.split(" ")
+      .filter(Boolean)
+      .map((part) => part[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() || "YN";
+
   return (
-    <section className="relative z-[20] mx-auto mt-28 w-full max-w-6xl px-6 pb-10 md:mt-32 md:px-10">
-      <div className="rounded-2xl border border-[#7042f861] bg-[#0b0426]/60 p-8 shadow-xl shadow-[#2A0E61]/25 backdrop-blur-sm md:p-12">
-        <p className="text-xs uppercase tracking-[0.22em] text-[#b49bff]">Hero</p>
-        <h1 className="mt-4 text-4xl font-bold text-white md:text-6xl">
-          Alleluia Cervi
-        </h1>
-        <p className="mt-3 text-lg uppercase tracking-[0.16em] text-[#d7ccff] md:text-xl">
-          Brand &amp; Digital Designer
-        </p>
+    <motion.div
+      initial={prefersReducedMotion ? undefined : "hidden"}
+      animate={prefersReducedMotion ? undefined : "visible"}
+      className="mt-28 z-[20] flex w-full flex-col-reverse items-center justify-center gap-12 px-6 md:mt-32 md:flex-row md:px-20"
+    >
+      <div className="m-auto flex h-full w-full flex-col justify-center gap-5 text-start">
+        <motion.div
+          variants={prefersReducedMotion ? undefined : slideInFromTop}
+          className="inline-flex w-fit items-center rounded-full border border-[#8b74ff]/35 bg-[#10082c]/80 px-3 py-1.5 shadow-[0_8px_24px_rgba(42,14,97,0.26)] backdrop-blur-sm"
+        >
+          <SparklesIcon className="mr-1.5 h-3.5 w-3.5 text-[#b49bff]" />
+          <h1 className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#d8d0ff] md:text-[11px]">
+            Software Engineer
+          </h1>
+        </motion.div>
 
-        <p className="mt-8 max-w-4xl text-lg leading-relaxed text-gray-200">
-          I design structured visual identities and digital experiences that are
-          clear, scalable, and built for real-world impact.
-        </p>
+        <motion.div
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
+          className="flex flex-col gap-6 mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
+        >
+          <span>
+            Designing
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+              polished digital experiences
+            </span>
+            with reliable engineering
+          </span>
+        </motion.div>
 
-        <p className="mt-6 max-w-4xl text-base leading-relaxed text-gray-300">
-          I&apos;m Alleluia Cervi, a brand and digital designer focused on
-          creating structured visual identities and scalable digital experiences.
-          My work combines strategic design thinking with technical understanding,
-          allowing me to build brands that are not only visually strong but also
-          practical across real platforms.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
+        <motion.p
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
+          className="text-lg text-gray-400 mt-4 mb-3 md:my-5 max-w-[600px]"
+        >
+          {PROFILE_DESCRIPTION}
+        </motion.p>
+        <motion.div
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(1)}
+          className="flex flex-wrap gap-3 md:gap-4"
+        >
           <a
             href="#projects"
-            className="button-primary rounded-lg px-6 py-2 text-sm font-medium text-white"
+            className="py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px] px-6"
           >
-            Selected Work
+            View Projects
           </a>
-          <a
-            href="#case-studies"
-            className="rounded-lg border border-[#8b74ff]/50 bg-[#8b74ff]/10 px-6 py-2 text-sm font-medium text-[#e8e1ff] transition-colors hover:bg-[#8b74ff]/20"
-          >
-            Case Studies
-          </a>
-        </div>
+        </motion.div>
+        <motion.div
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(1.1)}
+          className="mt-1 md:mt-2 w-full max-w-[600px]"
+        >
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
+            Design Tools
+          </p>
+          <div className="mt-3 md:mt-4 space-y-3 md:space-y-5">
+            {DESIGN_TOOL_ROWS.map((row, rowIndex) => (
+              <div
+                key={`row-${rowIndex}`}
+                className="flex items-center justify-center gap-5 sm:gap-7 md:gap-8"
+              >
+                {row.map((logoSrc) => (
+                  <span
+                    key={logoSrc}
+                    tabIndex={0}
+                    className="group inline-flex items-center justify-center rounded-md outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60"
+                  >
+                    <Image
+                      src={logoSrc}
+                      alt={`design tool ${logoSrc.replace("/svg", "").replace(".svg", "")}`}
+                      width={52}
+                      height={52}
+                      className="h-12 w-12 sm:h-14 sm:w-14 object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:scale-105 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
+                    />
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
-    </section>
+
+      <motion.div
+        variants={prefersReducedMotion ? undefined : slideInFromRight(0.8)}
+        className="w-full h-full flex justify-center items-center"
+      >
+        <div className="w-full max-w-[420px] flex flex-col gap-6">
+          <div className="w-full rounded-[28px] border border-[#7042f861] bg-[#0b0426]/60 p-6 shadow-xl shadow-[#2A0E61]/30 backdrop-blur-sm">
+            <div className="relative mx-auto h-[140px] w-[140px] overflow-hidden rounded-full border border-[#8b74ff]/70 bg-[#140b3c]">
+              {showProfilePhoto ? (
+                <Image
+                  src={PROFILE_PHOTO}
+                  alt={PROFILE_NAME}
+                  fill
+                  className="object-cover"
+                  sizes="140px"
+                  onError={() => setShowProfilePhoto(false)}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-3xl font-semibold text-white">
+                  {profileInitials}
+                </div>
+              )}
+            </div>
+
+            <div className="mt-5 text-center">
+              <h2 className="text-2xl font-semibold text-white">{PROFILE_NAME}</h2>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[#b49bff]">
+                {PROFILE_ROLE}
+              </p>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                {PROFILE_HIGHLIGHTS.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full border border-[#8b74ff]/70 bg-[#8b74ff]/10 px-3 py-1 text-xs text-[#d2c8ff]"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full px-2">
+            <div className="flex items-center gap-3">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
+                Core Tools
+              </p>
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+            </div>
+            <div
+              className="group relative mt-4 h-[280px] md:h-[300px] w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60"
+              tabIndex={0}
+            >
+              <Image
+                src="/mainIconsdark.svg"
+                alt="technology icons"
+                fill
+                className="object-contain scale-[1.16] md:scale-[1.2] opacity-75 saturate-50 transition-all duration-300 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
+                sizes="(max-width: 768px) 92vw, 460px"
+              />
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
