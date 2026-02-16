@@ -2,6 +2,8 @@
 
 import { Socials } from "@/constants";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { FaXTwitter } from "react-icons/fa6";
+import { RxInstagramLogo } from "react-icons/rx";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -11,10 +13,16 @@ const NAV_LINKS = [
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
-const SOCIAL_LINKS: Record<string, string> = {
-  Discord: "https://discord.com",
-  Facebook: "https://facebook.com",
-  Instagram: "https://instagram.com",
+
+const renderSocialIcon = (socialName: string) => {
+  switch (socialName) {
+    case "Instagram":
+      return <RxInstagramLogo className="h-4 w-4" />;
+    case "X":
+      return <FaXTwitter className="h-4 w-4" />;
+    default:
+      return <span className="text-xs font-semibold">{socialName.slice(0, 1)}</span>;
+  }
 };
 
 const Navbar = () => {
@@ -54,19 +62,13 @@ const Navbar = () => {
               {Socials.map((social) => (
                 <a
                   key={social.name}
-                  href={SOCIAL_LINKS[social.name] ?? "/"}
+                  href={social.href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.name}
                   className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#8b74ff]/35 bg-[#0d0830]/70 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#8b74ff]/70 hover:bg-[#8b74ff]/15"
                 >
-                  <Image
-                    src={social.src}
-                    alt={social.name}
-                    width={16}
-                    height={16}
-                    className="h-4 w-4 object-contain"
-                  />
+                  {renderSocialIcon(social.name)}
                 </a>
               ))}
             </div>
@@ -105,19 +107,13 @@ const Navbar = () => {
             {Socials.map((social) => (
               <a
                 key={social.name}
-                href={SOCIAL_LINKS[social.name] ?? "/"}
+                href={social.href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.name}
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#8b74ff]/35 bg-[#0d0830]/70 transition-colors hover:bg-[#8b74ff]/20"
               >
-                <Image
-                  src={social.src}
-                  alt={social.name}
-                  width={16}
-                  height={16}
-                  className="h-4 w-4 object-contain"
-                />
+                {renderSocialIcon(social.name)}
               </a>
             ))}
           </div>

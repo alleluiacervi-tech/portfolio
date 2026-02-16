@@ -2,9 +2,6 @@ import React from "react";
 import {
   RxDiscordLogo,
   RxGithubLogo,
-  RxInstagramLogo,
-  RxTwitterLogo,
-  RxLinkedinLogo,
 } from "react-icons/rx";
 
 import { FaYoutube } from "react-icons/fa";
@@ -39,7 +36,7 @@ const Footer = () => {
                     </p>
                     <p className="flex flex-row items-center my-[15px] cursor-pointer">
                         <RxGithubLogo />
-                        <span className="text-[15px] ml-[6px]">Twitter</span>    
+                        <span className="text-[15px] ml-[6px]">X</span>    
                     </p>
                     <p className="flex flex-row items-center my-[15px] cursor-pointer">
                         <RxDiscordLogo />

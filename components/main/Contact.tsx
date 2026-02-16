@@ -2,10 +2,23 @@
 
 import React, { FormEvent, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ClockIcon, EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import { FaXTwitter } from "react-icons/fa6";
 import { slideInFromLeft, slideInFromRight } from "@/utils/motion";
 
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "alleluia@example.com";
+const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "alleluiacervi@gmail.com";
+const CONTACT_PHONE =
+  process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+250788505946";
+const CONTACT_LOCATION =
+  process.env.NEXT_PUBLIC_CONTACT_LOCATION ?? "Kigali, Rwanda";
+const CONTACT_X_URL =
+  process.env.NEXT_PUBLIC_CONTACT_X_URL ?? "https://x.com/@AIandgrowth";
+const CONTACT_X_HANDLE = "@AIandgrowth";
 
 type ContactFormState = {
   name: string;
@@ -89,20 +102,41 @@ const Contact = () => {
             </div>
 
             <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
-              <MapPinIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
+              <PhoneIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Location</p>
-                <p className="mt-1 text-sm text-white">Remote, available worldwide</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Phone</p>
+                <a
+                  href={`tel:${CONTACT_PHONE}`}
+                  className="mt-1 inline-block text-sm text-white transition-colors hover:text-[#d8d0ff]"
+                >
+                  {CONTACT_PHONE}
+                </a>
               </div>
             </div>
 
             <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
-              <ClockIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
+              <MapPinIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Location</p>
+                <p className="mt-1 text-sm text-white">{CONTACT_LOCATION}</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
+              <a
+                href={CONTACT_X_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open X profile"
+                className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#8b74ff]/45 bg-[#0d0830]/70 text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#b49bff] hover:bg-[#8b74ff]/20"
+              >
+                <FaXTwitter className="h-4 w-4" />
+              </a>
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">
-                  Response Time
+                  X
                 </p>
-                <p className="mt-1 text-sm text-white">Usually within 24 hours</p>
+                <p className="mt-1 text-sm text-white">{CONTACT_X_HANDLE}</p>
               </div>
             </div>
           </div>
