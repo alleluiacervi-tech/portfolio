@@ -5,9 +5,9 @@ import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
 
 export const metadata: Metadata = {
-  title: "Alleluia Cervi | Software Engineer & Graphic Designer",
+  title: "Alleluia Cervi | Brand & Digital Designer",
   description:
-    "Professional portfolio of Alleluia Cervi, a software engineer and graphic designer building polished, scalable digital products.",
+    "Portfolio of Alleluia Cervi, a brand and digital designer creating structured visual identities and scalable digital experiences.",
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",
