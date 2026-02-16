@@ -3,46 +3,67 @@ import ProjectCard from "../sub/ProjectCard";
 
 const DESIGN_PROJECTS = [
   {
-    src: "/edit2.png",
-    title: "Editorial Brand Campaign System",
+    src: "/Design4.jpeg",
+    title: "Forex App Interface Direction",
     description:
-      "A cohesive digital campaign direction built with modular layouts, intentional typography rhythm, and brand-consistent visual storytelling.",
-    category: "Brand & Visual System",
+      "A mobile-first trading interface concept balancing bold visual hierarchy, real-time data readability, and action-focused interaction patterns.",
+    category: "Fintech Product Design",
   },
   {
-    src: "/nikedash.png",
-    title: "Product Marketing Dashboard Concept",
+    src: "/Design1.jpg",
+    title: "Crypto Trading Mobile UI",
     description:
-      "A design-led dashboard concept focused on clear hierarchy, structured data visibility, and high-contrast decision support for teams.",
-    category: "Digital Experience Design",
+      "A clean and intuitive chart-first layout designed to support high-frequency decision making with clear buy and sell pathways.",
+    category: "Mobile Experience Design",
   },
   {
-    src: "/profiol3.png",
-    title: "Portfolio Visual Language Exploration",
+    src: "/Design2.jpeg",
+    title: "Digital Wallet Dashboard",
     description:
-      "A design study centered on tone, spacing cadence, and component consistency to create a professional studio-level portfolio presence.",
-    category: "Interface Direction",
+      "A polished dual-screen mobile dashboard that combines account management, transfer actions, and performance metrics in a cohesive flow.",
+    category: "UI/UX Design",
+  },
+  {
+    src: "/Design3.jpg",
+    title: "Operations Analytics Dashboard",
+    description:
+      "A dark-themed dashboard system built for quick monitoring, KPI visibility, and structured information scanning across business units.",
+    category: "Interface Systems",
+  },
+  {
+    src: "/brand.jpg",
+    title: "Monochrome Brand Merch Collection",
+    description:
+      "A full merchandise mockup set demonstrating logo consistency, print hierarchy, and practical brand usage across physical touchpoints.",
+    category: "Brand Identity",
+  },
+  {
+    src: "/brand1.jpeg",
+    title: "Dexlomri Brand Application Kit",
+    description:
+      "A vibrant brand application study spanning apparel, accessories, and digital product surfaces with unified visual language.",
+    category: "Brand Application",
   },
 ];
 
 const DEVELOPMENT_PROJECTS = [
   {
-    src: "/NextWebsite.png",
-    title: "Modern Next.js Portfolio",
+    src: "/blockchain.jpg",
+    title: "Blockchain Network Platform Concept",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "A blockchain-focused product concept illustrating distributed architecture, secure transaction routes, and network-level system communication.",
   },
   {
     src: "/CardImage.png",
     title: "Interactive Website Cards",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "A responsive component suite with layered card interactions, smooth transitions, and accessibility-focused behavior for modern web interfaces.",
   },
   {
     src: "/SpaceWebsite.png",
     title: "Space Themed Website",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "An immersive website experience blending motion, storytelling, and scalable front-end architecture for performance-oriented delivery.",
   },
 ];
 
