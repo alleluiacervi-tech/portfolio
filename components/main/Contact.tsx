@@ -85,9 +85,12 @@ const Contact = () => {
           variants={prefersReducedMotion ? undefined : slideInFromLeft(0.1)}
           className="panel-card panel-card-hover"
         >
-          <h3 className="text-2xl font-semibold text-white">Lets build something great.</h3>
+          <h3 className="text-2xl font-semibold text-white">
+            Lets build something meaningful.
+          </h3>
           <p className="mt-3 text-sm text-gray-300">
-            I am open to freelance and full-time software engineering opportunities.
+            I am open to brand design, digital product design, and development
+            collaborations.
           </p>
 
           <div className="mt-8 space-y-4">
