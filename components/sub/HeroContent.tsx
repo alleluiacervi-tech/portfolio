@@ -28,6 +28,7 @@ const PROFILE_HIGHLIGHTS = [
   "TypeScript",
   "Node.js",
 ];
+const PROFILE_HIGHLIGHTS_MOBILE_LIMIT = 4;
 const DESIGN_TOOL_ROWS = [
   ["/svg1.svg", "/svg2.svg", "/svg3.svg", "/svg4.svg"],
   ["/svg5.svg", "/svg6.svg", "/svg7.svg"],
@@ -53,68 +54,123 @@ const HeroContent = () => {
     <motion.div
       initial={prefersReducedMotion ? undefined : "hidden"}
       animate={prefersReducedMotion ? undefined : "visible"}
-      className="z-[20] mt-28 flex w-full flex-col-reverse items-center justify-center gap-14 px-6 md:mt-32 md:flex-row md:gap-16 md:px-10 xl:px-16"
+      className="z-[20] mt-28 w-full px-6 md:mt-32 md:px-10 xl:px-16"
     >
-      <div className="m-auto flex h-full w-full max-w-2xl flex-col justify-center gap-6 text-start">
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col-reverse items-center gap-12 md:flex-row md:items-center md:justify-between md:gap-14">
+        <div className="flex h-full w-full max-w-2xl flex-col justify-center gap-6 text-start">
+          <motion.div
+            variants={prefersReducedMotion ? undefined : slideInFromTop}
+            className="inline-flex w-fit items-center rounded-full border border-[#8b74ff]/35 bg-[#10082c]/80 px-3 py-1.5 shadow-[0_8px_24px_rgba(42,14,97,0.26)] backdrop-blur-sm"
+          >
+            <SparklesIcon className="mr-1.5 h-3.5 w-3.5 text-[#b49bff]" />
+            <h1 className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#d8d0ff] md:text-[11px]">
+              Brand & Digital Designer
+            </h1>
+          </motion.div>
+
+          <motion.h1
+            variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
+            className="mt-2 text-5xl font-semibold leading-[0.96] text-white md:text-6xl lg:text-7xl"
+          >
+            {PROFILE_NAME}
+          </motion.h1>
+
+          <motion.h2
+            variants={prefersReducedMotion ? undefined : slideInFromLeft(0.65)}
+            className="max-w-[640px] text-2xl font-semibold leading-tight text-[#e3dcff] md:text-3xl"
+          >
+            {PROFILE_PRIMARY_DESCRIPTOR}
+          </motion.h2>
+
+          <motion.p
+            variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
+            className="max-w-[620px] text-base leading-relaxed text-slate-300 md:text-lg"
+          >
+            {PROFILE_DESCRIPTION}
+          </motion.p>
+
+          <motion.div
+            variants={prefersReducedMotion ? undefined : slideInFromLeft(0.95)}
+            className="flex flex-wrap gap-3"
+          >
+            <a
+              href="#design-work"
+              className="button-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-6 py-2 text-center text-sm font-medium text-white md:text-base"
+            >
+              View Design Work
+            </a>
+            <a
+              href="#development-projects"
+              className="inline-flex items-center justify-center rounded-lg border border-[#8b74ff]/45 bg-[#10082c]/75 px-6 py-2 text-sm font-medium text-[#ddd5ff] transition-all duration-300 hover:border-[#8b74ff]/75 hover:bg-[#8b74ff]/15 hover:text-white md:text-base"
+            >
+              Development Projects
+            </a>
+          </motion.div>
+        </div>
+
         <motion.div
-          variants={prefersReducedMotion ? undefined : slideInFromTop}
-          className="inline-flex w-fit items-center rounded-full border border-[#8b74ff]/35 bg-[#10082c]/80 px-3 py-1.5 shadow-[0_8px_24px_rgba(42,14,97,0.26)] backdrop-blur-sm"
+          variants={prefersReducedMotion ? undefined : slideInFromRight(0.75)}
+          className="flex h-full w-full max-w-[390px] items-center justify-center"
         >
-          <SparklesIcon className="mr-1.5 h-3.5 w-3.5 text-[#b49bff]" />
-          <h1 className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#d8d0ff] md:text-[11px]">
-            Brand & Digital Designer
-          </h1>
+          <div className="panel-card w-full rounded-[28px] p-6">
+            <div className="relative mx-auto h-[140px] w-[140px] overflow-hidden rounded-full border border-[#8b74ff]/70 bg-[#140b3c]">
+              {showProfilePhoto ? (
+                <Image
+                  src={PROFILE_PHOTO}
+                  alt={PROFILE_NAME}
+                  fill
+                  className="object-cover"
+                  sizes="140px"
+                  onError={() => setShowProfilePhoto(false)}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-3xl font-semibold text-white">
+                  {profileInitials}
+                </div>
+              )}
+            </div>
+
+            <div className="mt-5 text-center">
+              <h2 className="text-xl font-semibold text-white md:text-2xl">
+                {PROFILE_NAME}
+              </h2>
+              <p className="mt-2 text-sm font-medium text-[#e7deff]">
+                {PROFILE_PRIMARY_DESCRIPTOR}
+              </p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#b49bff]">
+                {PROFILE_SECONDARY_DESCRIPTOR}
+              </p>
+              <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-slate-300">
+                {PROFILE_DEVELOPMENT_ROLE}
+              </p>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+                {PROFILE_HIGHLIGHTS.map((highlight, index) => (
+                  <span
+                    key={highlight}
+                    className={`rounded-full border border-[#8b74ff]/70 bg-[#8b74ff]/10 px-3 py-1 text-[11px] text-[#d2c8ff] ${
+                      index >= PROFILE_HIGHLIGHTS_MOBILE_LIMIT
+                        ? "hidden md:inline-flex"
+                        : "inline-flex"
+                    }`}
+                  >
+                    {highlight}
+                  </span>
+                ))}
+                {PROFILE_HIGHLIGHTS.length > PROFILE_HIGHLIGHTS_MOBILE_LIMIT ? (
+                  <span className="inline-flex rounded-full border border-[#8b74ff]/45 bg-[#8b74ff]/8 px-3 py-1 text-[11px] text-[#bfaeff] md:hidden">
+                    +{PROFILE_HIGHLIGHTS.length - PROFILE_HIGHLIGHTS_MOBILE_LIMIT} more
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </motion.div>
+      </div>
 
-        <motion.h1
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
-          className="mt-2 text-5xl font-semibold leading-[0.96] text-white md:text-6xl lg:text-7xl"
-        >
-          {PROFILE_NAME}
-        </motion.h1>
-
-        <motion.h2
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.65)}
-          className="max-w-[640px] text-2xl font-semibold leading-tight text-[#e3dcff] md:text-3xl"
-        >
-          {PROFILE_PRIMARY_DESCRIPTOR}
-        </motion.h2>
-
-        <motion.p
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
-          className="max-w-[620px] text-base leading-relaxed text-slate-300 md:text-lg"
-        >
-          {PROFILE_DESCRIPTION}
-        </motion.p>
-
-        <motion.p
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.9)}
-          className="max-w-[620px] text-[11px] uppercase tracking-[0.2em] text-[#b49bff]"
-        >
-          {PROFILE_DEVELOPMENT_ROLE} | Product Implementation
-        </motion.p>
-
+      <div className="mx-auto mt-8 grid w-full max-w-[1180px] gap-5 md:mt-10 md:grid-cols-2">
         <motion.div
           variants={prefersReducedMotion ? undefined : slideInFromLeft(1)}
-          className="flex flex-wrap gap-3"
-        >
-          <a
-            href="#design-work"
-            className="button-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-6 py-2 text-center text-sm font-medium text-white md:text-base"
-          >
-            View Design Work
-          </a>
-          <a
-            href="#development-projects"
-            className="inline-flex items-center justify-center rounded-lg border border-[#8b74ff]/45 bg-[#10082c]/75 px-6 py-2 text-sm font-medium text-[#ddd5ff] transition-all duration-300 hover:border-[#8b74ff]/75 hover:bg-[#8b74ff]/15 hover:text-white md:text-base"
-          >
-            Development Projects
-          </a>
-        </motion.div>
-
-        <motion.div
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(1.05)}
-          className="panel-card mt-1 max-w-[620px] px-5 py-5 md:px-6"
+          className="panel-card px-5 py-5 md:px-6"
         >
           <p className="section-eyebrow">Strategic Approach</p>
           <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">
@@ -123,8 +179,8 @@ const HeroContent = () => {
         </motion.div>
 
         <motion.div
-          variants={prefersReducedMotion ? undefined : slideInFromLeft(1.1)}
-          className="panel-card mt-1 w-full max-w-[620px] px-5 py-5 md:px-6"
+          variants={prefersReducedMotion ? undefined : slideInFromRight(1)}
+          className="panel-card px-5 py-5 md:px-6"
         >
           <div className="flex items-center gap-3">
             <p className="section-eyebrow">Design Tools</p>
@@ -161,89 +217,38 @@ const HeroContent = () => {
             ))}
           </div>
         </motion.div>
-      </div>
 
-      <motion.div
-        variants={prefersReducedMotion ? undefined : slideInFromRight(0.8)}
-        className="flex h-full w-full items-center justify-center"
-      >
-        <div className="flex w-full max-w-[420px] flex-col gap-6">
-          <div className="panel-card rounded-[28px] p-6">
-            <div className="relative mx-auto h-[140px] w-[140px] overflow-hidden rounded-full border border-[#8b74ff]/70 bg-[#140b3c]">
-              {showProfilePhoto ? (
-                <Image
-                  src={PROFILE_PHOTO}
-                  alt={PROFILE_NAME}
-                  fill
-                  className="object-cover"
-                  sizes="140px"
-                  onError={() => setShowProfilePhoto(false)}
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-3xl font-semibold text-white">
-                  {profileInitials}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-5 text-center">
-              <h2 className="text-xl font-semibold text-white md:text-2xl">
-                {PROFILE_NAME}
-              </h2>
-              <p className="mt-2 text-sm font-medium text-[#e7deff]">
-                {PROFILE_PRIMARY_DESCRIPTOR}
-              </p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#b49bff]">
-                {PROFILE_SECONDARY_DESCRIPTOR}
-              </p>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-slate-300">
-                {PROFILE_DEVELOPMENT_ROLE}
-              </p>
-              <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                Design-first execution with production-ready implementation.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
-                {PROFILE_HIGHLIGHTS.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="rounded-full border border-[#8b74ff]/70 bg-[#8b74ff]/10 px-3 py-1 text-[11px] text-[#d2c8ff]"
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-            </div>
+        <motion.div
+          variants={prefersReducedMotion ? undefined : slideInFromTop}
+          className="panel-card w-full px-3 py-5 md:col-span-2"
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
+            <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
+              Core Tools
+            </p>
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
           </div>
-
-          <div className="panel-card w-full px-3 py-5">
-            <div className="flex items-center gap-3">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
-              <p className="text-[11px] uppercase tracking-[0.2em] text-[#b49bff]">
-                Core Tools
-              </p>
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
-            </div>
-            <div
-              style={getIlluminationStyle(0.44)}
-              className={`relative mt-4 h-[280px] w-full rounded-xl md:h-[300px] ${
-                prefersReducedMotion ? "" : "icon-shell-cycle"
+          <div
+            style={getIlluminationStyle(0.44)}
+            className={`relative mt-4 h-[240px] w-full rounded-xl md:h-[280px] ${
+              prefersReducedMotion ? "" : "icon-shell-cycle"
+            }`}
+          >
+            <Image
+              src="/mainIconsdark.svg"
+              alt="technology icons"
+              fill
+              className={`scale-[1.08] object-contain md:scale-[1.16] ${
+                prefersReducedMotion
+                  ? "opacity-90 saturate-95"
+                  : "icon-auto-cycle icon-auto-cycle-core"
               }`}
-            >
-              <Image
-                src="/mainIconsdark.svg"
-                alt="technology icons"
-                fill
-                className={`scale-[1.16] object-contain md:scale-[1.2] ${
-                  prefersReducedMotion
-                    ? "opacity-90 saturate-95"
-                    : "icon-auto-cycle icon-auto-cycle-core"
-                }`}
-                sizes="(max-width: 768px) 92vw, 460px"
-              />
-            </div>
+              sizes="(max-width: 768px) 92vw, 960px"
+            />
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };
