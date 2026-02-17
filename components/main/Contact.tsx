@@ -126,10 +126,7 @@ const Contact = () => {
             </div>
 
             <div className="rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">
-                Social
-              </p>
-              <div className="mt-3 flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <a
                   href={CONTACT_X_URL}
                   target="_blank"
