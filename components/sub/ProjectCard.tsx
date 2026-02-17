@@ -7,8 +7,12 @@ interface Props {
   src: string;
   gallery?: string[];
   title: string;
-  description: string;
+  description?: string;
+  summary?: string;
   category?: string;
+  purpose?: string;
+  concept?: string;
+  result?: string;
   featured?: boolean;
   className?: string;
   rotationMs?: number;
@@ -19,7 +23,11 @@ const ProjectCard = ({
   gallery = [],
   title,
   description,
+  summary,
   category,
+  purpose,
+  concept,
+  result,
   featured = false,
   className = "",
   rotationMs = 4500,
@@ -37,6 +45,7 @@ const ProjectCard = ({
   const [isFocused, setIsFocused] = useState(false);
   const hasImageRotation = imageSources.length > 1;
   const shouldPauseRotation = isHovered || isFocused;
+  const currentImageIndex = activeImageIndex % imageSources.length;
 
   const showPreviousImage = () => {
     setActiveImageIndex((currentIndex) => {
@@ -56,10 +65,6 @@ const ProjectCard = ({
   };
 
   useEffect(() => {
-    setActiveImageIndex(0);
-  }, [imageSources]);
-
-  useEffect(() => {
     if (!hasImageRotation || shouldPauseRotation) {
       return;
     }
@@ -76,11 +81,18 @@ const ProjectCard = ({
     };
   }, [hasImageRotation, imageSources.length, rotationMs, shouldPauseRotation]);
 
+  const detailRows = [
+    { label: "Purpose", value: purpose },
+    { label: "Concept", value: concept },
+    { label: "Result", value: result },
+  ].filter((row) => Boolean(row.value?.trim()));
+  const summaryText = summary ?? description ?? "";
+
   const cardClassName = [
-    "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-[#0b0426]/65 backdrop-blur-sm transition-all duration-300",
+    "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-[#0b0426]/70 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500",
     featured
-      ? "border-[#8b74ff]/70 shadow-[0_18px_45px_rgba(42,14,97,0.38)] hover:-translate-y-1.5 hover:shadow-[0_26px_60px_rgba(42,14,97,0.46)]"
-      : "border-[#4e2a96]/70 shadow-[0_14px_34px_rgba(42,14,97,0.26)] hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_22px_52px_rgba(42,14,97,0.4)]",
+      ? "border-[#8b74ff]/65 shadow-[0_22px_52px_rgba(42,14,97,0.34)] hover:-translate-y-[5px] hover:border-[#b49bff]/75 hover:shadow-[0_30px_70px_rgba(42,14,97,0.42)]"
+      : "border-[#4e2a96]/65 shadow-[0_14px_34px_rgba(42,14,97,0.24)] hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_24px_54px_rgba(42,14,97,0.34)]",
     className,
   ]
     .filter(Boolean)
@@ -106,8 +118,8 @@ const ProjectCard = ({
             alt={title}
             fill
             sizes="(max-width: 768px) 92vw, (max-width: 1280px) 48vw, 32vw"
-            className={`h-full w-full object-cover object-center transition-[opacity,transform] duration-700 group-hover:scale-[1.02] ${
-              index === activeImageIndex ? "opacity-100" : "opacity-0"
+            className={`h-full w-full object-cover object-center transition-[opacity,transform] duration-700 group-hover:scale-[1.03] ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
           />
         ))}
@@ -138,7 +150,7 @@ const ProjectCard = ({
               <span
                 key={`${title}-dot-${imageSource}`}
                 className={`h-1.5 w-1.5 rounded-full ${
-                  index === activeImageIndex ? "bg-white/90" : "bg-white/35"
+                  index === currentImageIndex ? "bg-white/90" : "bg-white/35"
                 }`}
               />
             ))}
@@ -146,22 +158,39 @@ const ProjectCard = ({
         ) : null}
       </div>
 
-      <div className="relative flex flex-1 flex-col space-y-2.5 p-4 md:p-5">
+      <div className="relative flex flex-1 flex-col p-5 md:p-6">
         {category ? (
-          <p className="text-[10px] uppercase tracking-[0.14em] text-[#b49bff]">
+          <p className="inline-flex w-fit rounded-full border border-[#8b74ff]/45 bg-[#8b74ff]/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-[#cfc3ff]">
             {category}
           </p>
         ) : null}
         <h3
-          className={`text-white ${
+          className={`project-card-title mt-3 font-semibold leading-snug text-white ${
             featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"
-          } project-card-title font-semibold leading-snug`}
+          }`}
         >
           {title}
         </h3>
-        <p className="project-card-description text-sm leading-relaxed text-slate-300">
-          {description}
-        </p>
+        {summaryText ? (
+          <p className="project-card-description mt-2 text-sm leading-relaxed text-slate-300">
+            {summaryText}
+          </p>
+        ) : null}
+        {detailRows.length > 0 ? (
+          <div className="mt-4 space-y-2.5 border-t border-[#8b74ff]/25 pt-4">
+            {detailRows.map((row) => (
+              <p
+                key={`${title}-${row.label}`}
+                className="text-sm leading-relaxed text-slate-200"
+              >
+                <span className="mr-2 text-[10px] uppercase tracking-[0.14em] text-[#b49bff]">
+                  {row.label}
+                </span>
+                <span className="text-slate-300">{row.value}</span>
+              </p>
+            ))}
+          </div>
+        ) : null}
       </div>
     </article>
   );

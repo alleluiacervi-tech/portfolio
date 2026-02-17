@@ -11,6 +11,11 @@
   body {
     min-height: 100%;
     background-color: #030014;
+    background-image: radial-gradient(
+      circle at 12% 10%,
+      rgba(96, 76, 180, 0.22),
+      transparent 44%
+    );
   }
 
   html {
@@ -20,7 +25,7 @@
   body {
     font-family: var(--font-body), "Segoe UI", Helvetica, Arial, sans-serif;
     letter-spacing: 0.01em;
-    line-height: 1.55;
+    line-height: 1.6;
     color: #e5e7eb;
   }
 
@@ -37,27 +42,27 @@
 
 @layer components {
   .section-shell {
-    @apply relative mx-auto w-full max-w-6xl px-6 md:px-10;
+    @apply relative mx-auto w-full max-w-[1180px] px-6 md:px-10;
   }
 
   .section-title {
-    @apply text-3xl font-semibold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-300 md:text-4xl;
+    @apply text-3xl font-semibold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#efe9ff] via-[#d9ccff] to-[#9ad7ff] md:text-4xl lg:text-[2.8rem];
   }
 
   .section-eyebrow {
-    @apply text-[11px] uppercase tracking-[0.2em] text-[#b49bff];
+    @apply text-[10px] uppercase tracking-[0.22em] text-[#b49bff];
   }
 
   .section-intro {
-    @apply mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base;
+    @apply mt-4 max-w-[720px] text-sm leading-relaxed text-slate-300 md:text-[1.02rem];
   }
 
   .panel-card {
-    @apply rounded-2xl border border-[#7042f861] bg-[#0b0426]/60 p-6 shadow-xl shadow-[#2A0E61]/25 backdrop-blur-sm transition-all duration-300;
+    @apply rounded-2xl border border-[#7042f84c] bg-[#0b0426]/62 p-6 shadow-[0_16px_46px_rgba(16,8,42,0.34)] backdrop-blur-sm transition-all duration-300;
   }
 
   .panel-card-hover {
-    @apply hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_20px_55px_rgba(42,14,97,0.42)];
+    @apply hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_24px_58px_rgba(42,14,97,0.36)];
   }
 
   .clean-divider {
@@ -100,22 +105,26 @@
 .button-primary {
   background: linear-gradient(
       180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.32) 100%
+      rgba(60, 8, 126, 0.08) 0%,
+      rgba(60, 8, 126, 0.4) 100%
     ),
-    rgba(113, 47, 255, 0.12);
-  box-shadow: inset 0 0 12px #bf97ff3d;
+    rgba(113, 47, 255, 0.2);
+  box-shadow:
+    inset 0 0 14px rgba(191, 151, 255, 0.28),
+    0 10px 28px rgba(36, 16, 84, 0.3);
   transition: all 0.3s ease;
 }
 
 .button-primary:hover {
   background: linear-gradient(
       180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.42) 100%
+      rgba(60, 8, 126, 0.1) 0%,
+      rgba(60, 8, 126, 0.5) 100%
     ),
-    rgba(113, 47, 255, 0.24);
-  box-shadow: inset 0 0 12px #bf97ff70;
+    rgba(113, 47, 255, 0.3);
+  box-shadow:
+    inset 0 0 14px rgba(191, 151, 255, 0.46),
+    0 14px 32px rgba(36, 16, 84, 0.38);
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */

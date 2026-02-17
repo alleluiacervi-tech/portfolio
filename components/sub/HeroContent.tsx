@@ -12,10 +12,10 @@ import Image from "next/image";
 
 const PROFILE_NAME = "Alleluia Cervi";
 const PROFILE_PRIMARY_DESCRIPTOR = "Brand & Digital Designer";
-const PROFILE_SECONDARY_DESCRIPTOR = "Designer with Development Expertise";
+const PROFILE_SECONDARY_DESCRIPTOR = "Strategic Visual Systems Specialist";
 const PROFILE_DEVELOPMENT_ROLE = "Software Developer";
 const PROFILE_DESCRIPTION =
-  "I combine brand thinking, visual craft, and full-stack engineering to deliver polished digital products from concept to launch.";
+  "I design brand-led digital products with clear hierarchy, cohesive systems, and implementation-ready precision.";
 const PROFILE_ABOUT =
   "I approach every project with strategic thinking, using design systems and strong visual structure to create scalable solutions that perform in real-world usability.";
 const PROFILE_PHOTO = "/alleluia.jpg";
@@ -53,7 +53,7 @@ const HeroContent = () => {
     <motion.div
       initial={prefersReducedMotion ? undefined : "hidden"}
       animate={prefersReducedMotion ? undefined : "visible"}
-      className="z-[20] mt-28 flex w-full flex-col-reverse items-center justify-center gap-14 px-6 md:mt-32 md:flex-row md:px-10 xl:px-16"
+      className="z-[20] mt-28 flex w-full flex-col-reverse items-center justify-center gap-14 px-6 md:mt-32 md:flex-row md:gap-16 md:px-10 xl:px-16"
     >
       <div className="m-auto flex h-full w-full max-w-2xl flex-col justify-center gap-6 text-start">
         <motion.div
@@ -66,25 +66,32 @@ const HeroContent = () => {
           </h1>
         </motion.div>
 
-        <motion.div
+        <motion.h1
           variants={prefersReducedMotion ? undefined : slideInFromLeft(0.5)}
-          className="mt-2 flex max-w-[640px] flex-col text-4xl font-semibold leading-tight text-white md:text-5xl lg:text-6xl"
+          className="mt-2 text-5xl font-semibold leading-[0.96] text-white md:text-6xl lg:text-7xl"
         >
-          <span>
-            Crafting
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-300 bg-clip-text text-transparent">
-              {" "}
-              strategic brand-led digital experiences{" "}
-            </span>
-            with development precision
-          </span>
-        </motion.div>
+          {PROFILE_NAME}
+        </motion.h1>
+
+        <motion.h2
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.65)}
+          className="max-w-[640px] text-2xl font-semibold leading-tight text-[#e3dcff] md:text-3xl"
+        >
+          {PROFILE_PRIMARY_DESCRIPTOR}
+        </motion.h2>
 
         <motion.p
           variants={prefersReducedMotion ? undefined : slideInFromLeft(0.8)}
           className="max-w-[620px] text-base leading-relaxed text-slate-300 md:text-lg"
         >
           {PROFILE_DESCRIPTION}
+        </motion.p>
+
+        <motion.p
+          variants={prefersReducedMotion ? undefined : slideInFromLeft(0.9)}
+          className="max-w-[620px] text-[11px] uppercase tracking-[0.2em] text-[#b49bff]"
+        >
+          {PROFILE_DEVELOPMENT_ROLE} | Product Implementation
         </motion.p>
 
         <motion.div
@@ -95,10 +102,10 @@ const HeroContent = () => {
             href="#design-work"
             className="button-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-6 py-2 text-center text-sm font-medium text-white md:text-base"
           >
-            View Projects
+            View Design Work
           </a>
           <a
-            href="#development-projects"
+            href="#projects"
             className="inline-flex items-center justify-center rounded-lg border border-[#8b74ff]/45 bg-[#10082c]/75 px-6 py-2 text-sm font-medium text-[#ddd5ff] transition-all duration-300 hover:border-[#8b74ff]/75 hover:bg-[#8b74ff]/15 hover:text-white md:text-base"
           >
             Development Projects
@@ -109,7 +116,7 @@ const HeroContent = () => {
           variants={prefersReducedMotion ? undefined : slideInFromLeft(1.05)}
           className="panel-card mt-1 max-w-[620px] px-5 py-5 md:px-6"
         >
-          <p className="section-eyebrow">About</p>
+          <p className="section-eyebrow">Strategic Approach</p>
           <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">
             {PROFILE_ABOUT}
           </p>
@@ -180,7 +187,7 @@ const HeroContent = () => {
             </div>
 
             <div className="mt-5 text-center">
-              <h2 className="text-2xl font-semibold text-white md:text-[30px]">
+              <h2 className="text-xl font-semibold text-white md:text-2xl">
                 {PROFILE_NAME}
               </h2>
               <p className="mt-2 text-sm font-medium text-[#e7deff]">
