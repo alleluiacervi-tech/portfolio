@@ -5,7 +5,8 @@ import { RxInstagramLogo } from "react-icons/rx";
 const QUICK_LINKS = [
   { label: "About", href: "#about-me" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#design-work" },
+  { label: "Design Work", href: "#design-work" },
+  { label: "Development", href: "#development-projects" },
   { label: "Contact", href: "#contact" },
 ];
 

@@ -105,7 +105,7 @@ const HeroContent = () => {
             View Design Work
           </a>
           <a
-            href="#projects"
+            href="#development-projects"
             className="inline-flex items-center justify-center rounded-lg border border-[#8b74ff]/45 bg-[#10082c]/75 px-6 py-2 text-sm font-medium text-[#ddd5ff] transition-all duration-300 hover:border-[#8b74ff]/75 hover:bg-[#8b74ff]/15 hover:text-white md:text-base"
           >
             Development Projects

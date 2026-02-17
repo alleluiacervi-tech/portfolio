@@ -5,13 +5,18 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaXTwitter } from "react-icons/fa6";
 import { RxInstagramLogo } from "react-icons/rx";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const NAV_LINKS = [
-  { label: "About", href: "#about-me" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#design-work" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about-me", sectionId: "about-me" },
+  { label: "Skills", href: "#skills", sectionId: "skills" },
+  { label: "Design Work", href: "#design-work", sectionId: "design-work" },
+  {
+    label: "Development",
+    href: "#development-projects",
+    sectionId: "development-projects",
+  },
+  { label: "Contact", href: "#contact", sectionId: "contact" },
 ];
 
 const renderSocialIcon = (socialName: string) => {
@@ -27,6 +32,47 @@ const renderSocialIcon = (socialName: string) => {
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(NAV_LINKS[0].sectionId);
+
+  useEffect(() => {
+    const resolveActiveSection = () => {
+      const offsetScrollPosition = window.scrollY + 180;
+      let currentSection = NAV_LINKS[0].sectionId;
+
+      for (const link of NAV_LINKS) {
+        const sectionElement = document.getElementById(link.sectionId);
+        if (!sectionElement) {
+          continue;
+        }
+
+        if (sectionElement.offsetTop <= offsetScrollPosition) {
+          currentSection = link.sectionId;
+        }
+      }
+
+      const reachedPageBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 8;
+      if (reachedPageBottom) {
+        currentSection = NAV_LINKS[NAV_LINKS.length - 1].sectionId;
+      }
+
+      setActiveSection((previousSection) =>
+        previousSection === currentSection ? previousSection : currentSection,
+      );
+    };
+
+    resolveActiveSection();
+
+    window.addEventListener("scroll", resolveActiveSection, { passive: true });
+    window.addEventListener("resize", resolveActiveSection);
+    window.addEventListener("hashchange", resolveActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", resolveActiveSection);
+      window.removeEventListener("resize", resolveActiveSection);
+      window.removeEventListener("hashchange", resolveActiveSection);
+    };
+  }, []);
 
   return (
     <header className="fixed top-3 z-50 w-full px-4 md:px-8">
@@ -50,7 +96,12 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-gray-200 transition-all duration-200 hover:bg-[#8b74ff]/20 hover:text-white"
+                aria-current={activeSection === link.sectionId ? "page" : undefined}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                  activeSection === link.sectionId
+                    ? "bg-[#8b74ff]/30 text-white"
+                    : "text-gray-200 hover:bg-[#8b74ff]/20 hover:text-white"
+                }`}
               >
                 {link.label}
               </a>
@@ -87,7 +138,7 @@ const Navbar = () => {
 
         <div
           className={`overflow-hidden px-4 transition-all duration-300 md:hidden ${
-            isMenuOpen ? "max-h-64 pb-4 opacity-100" : "max-h-0 opacity-0"
+            isMenuOpen ? "max-h-80 pb-4 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <nav className="flex flex-col gap-2 border-t border-[#8b74ff]/20 pt-3">
@@ -96,7 +147,12 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-200 transition-colors hover:bg-[#8b74ff]/20 hover:text-white"
+                aria-current={activeSection === link.sectionId ? "page" : undefined}
+                className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  activeSection === link.sectionId
+                    ? "bg-[#8b74ff]/25 text-white"
+                    : "text-gray-200 hover:bg-[#8b74ff]/20 hover:text-white"
+                }`}
               >
                 {link.label}
               </a>
