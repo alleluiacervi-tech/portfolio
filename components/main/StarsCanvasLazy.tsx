@@ -7,6 +7,7 @@ type Star = {
   y: number;
   r: number;
   depth: number;
+  glowScale: number;
   baseAlpha: number;
   twinkleAmplitude: number;
   twinkleSpeed: number;
@@ -42,18 +43,23 @@ export default function StarsCanvasLazy() {
 
     const createStar = (): Star => {
       const depth = Math.random();
-      const isSlightlyLarger = Math.random() > 0.97;
-      const baseSpeed = 9 + depth * 18;
-      const driftX = (Math.random() - 0.5) * (4 + depth * 5);
+      const sizeRoll = Math.random();
+      const isAccentStar = sizeRoll > 0.93;
+      const isSlightlyLarger = !isAccentStar && sizeRoll > 0.82;
+      const baseSpeed = 13 + depth * 24;
+      const driftX = (Math.random() - 0.5) * (5 + depth * 7);
 
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        r: isSlightlyLarger
-          ? Math.random() * 0.12 + 0.25
-          : Math.random() * 0.11 + 0.07,
+        r: isAccentStar
+          ? Math.random() * 0.12 + 0.28
+          : isSlightlyLarger
+            ? Math.random() * 0.11 + 0.16
+            : Math.random() * 0.11 + 0.07,
         depth,
-        baseAlpha: 0.2 + Math.random() * 0.55,
+        glowScale: isAccentStar ? 1.55 : isSlightlyLarger ? 1.36 : 1.18,
+        baseAlpha: isAccentStar ? 0.35 + Math.random() * 0.48 : 0.2 + Math.random() * 0.55,
         twinkleAmplitude: 0.06 + Math.random() * 0.2,
         twinkleSpeed: 0.65 + Math.random() * 1.1,
         twinklePhase: Math.random() * Math.PI * 2,
@@ -62,7 +68,9 @@ export default function StarsCanvasLazy() {
         speedPhase: Math.random() * Math.PI * 2,
         speedVariance: 0.08 + Math.random() * 0.22,
         tone:
-          Math.random() > 0.88
+          isAccentStar
+            ? "#eef3ff"
+            : Math.random() > 0.88
             ? "#dce7ff"
             : Math.random() > 0.66
               ? "#f3f7ff"
@@ -116,7 +124,7 @@ export default function StarsCanvasLazy() {
       vignetteGradient.addColorStop(0, "rgba(0, 0, 0, 0)");
       vignetteGradient.addColorStop(1, "rgba(2, 1, 10, 0.36)");
 
-      const count = Math.max(220, Math.floor((width * height) / 6000));
+      const count = clamp(Math.floor((width * height) / 3900), 320, 760);
       stars = Array.from({ length: count }, createStar);
     };
 
@@ -147,7 +155,7 @@ export default function StarsCanvasLazy() {
 
       for (const star of stars) {
         const speedPulse =
-          1 + Math.sin(smoothTime * 0.36 + star.speedPhase) * star.speedVariance;
+          1 + Math.sin(smoothTime * 0.42 + star.speedPhase) * star.speedVariance;
         star.x += star.driftX * speedPulse * delta;
         star.y += star.driftY * speedPulse * delta;
 
@@ -175,9 +183,10 @@ export default function StarsCanvasLazy() {
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.globalAlpha = alpha * (0.06 + star.depth * 0.07);
+        ctx.globalAlpha =
+          alpha * (0.05 + star.depth * 0.08 + (star.glowScale > 1.4 ? 0.03 : 0));
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * 1.18, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r * star.glowScale, 0, Math.PI * 2);
         ctx.fill();
       }
 
