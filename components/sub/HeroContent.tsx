@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   slideInFromLeft,
@@ -44,6 +44,10 @@ const HeroContent = () => {
       .join("")
       .slice(0, 2)
       .toUpperCase() || "AC";
+  const getIlluminationStyle = (delay: number): CSSProperties | undefined =>
+    prefersReducedMotion
+      ? undefined
+      : ({ "--illumination-delay": `${delay.toFixed(2)}s` } as CSSProperties);
 
   return (
     <motion.div
@@ -125,18 +129,24 @@ const HeroContent = () => {
                 key={`row-${rowIndex}`}
                 className="flex items-center justify-center gap-5 sm:gap-7 md:gap-8"
               >
-                {row.map((logoSrc) => (
+                {row.map((logoSrc, iconIndex) => (
                   <span
                     key={logoSrc}
-                    tabIndex={0}
-                    className="group inline-flex items-center justify-center rounded-md outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60"
+                    style={getIlluminationStyle(rowIndex * 1.18 + iconIndex * 0.56)}
+                    className={`inline-flex items-center justify-center rounded-md ${
+                      prefersReducedMotion ? "" : "icon-shell-cycle"
+                    }`}
                   >
                     <Image
                       src={logoSrc}
                       alt={`design tool ${logoSrc.replace("/svg", "").replace(".svg", "")}`}
                       width={52}
                       height={52}
-                      className="h-12 w-12 object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:scale-105 group-focus-visible:opacity-100 group-focus-visible:saturate-100 sm:h-14 sm:w-14"
+                      className={`h-12 w-12 object-contain sm:h-14 sm:w-14 ${
+                        prefersReducedMotion
+                          ? "opacity-90 saturate-95"
+                          : "icon-auto-cycle"
+                      }`}
                     />
                   </span>
                 ))}
@@ -207,14 +217,20 @@ const HeroContent = () => {
               <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#8b74ff]/60 to-transparent" />
             </div>
             <div
-              className="group relative mt-4 h-[280px] w-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#8b74ff]/60 md:h-[300px]"
-              tabIndex={0}
+              style={getIlluminationStyle(0.44)}
+              className={`relative mt-4 h-[280px] w-full rounded-xl md:h-[300px] ${
+                prefersReducedMotion ? "" : "icon-shell-cycle"
+              }`}
             >
               <Image
                 src="/mainIconsdark.svg"
                 alt="technology icons"
                 fill
-                className="scale-[1.16] object-contain opacity-75 saturate-50 transition-all duration-300 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100 md:scale-[1.2]"
+                className={`scale-[1.16] object-contain md:scale-[1.2] ${
+                  prefersReducedMotion
+                    ? "opacity-90 saturate-95"
+                    : "icon-auto-cycle icon-auto-cycle-core"
+                }`}
                 sizes="(max-width: 768px) 92vw, 460px"
               />
             </div>

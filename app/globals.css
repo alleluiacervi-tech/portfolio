@@ -143,3 +143,68 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+@keyframes icon-illumination {
+  0%,
+  14%,
+  100% {
+    opacity: 0.7;
+    filter: saturate(52%) brightness(0.92);
+  }
+  26% {
+    opacity: 0.8;
+    filter: saturate(66%) brightness(1);
+  }
+  38%,
+  50% {
+    opacity: 1;
+    filter: saturate(108%) brightness(1.12)
+      drop-shadow(0 0 12px rgba(140, 122, 255, 0.24));
+  }
+  64% {
+    opacity: 0.84;
+    filter: saturate(74%) brightness(1.03);
+  }
+  78% {
+    opacity: 0.74;
+    filter: saturate(56%) brightness(0.95);
+  }
+}
+
+@keyframes icon-shell-illumination {
+  0%,
+  14%,
+  100% {
+    box-shadow:
+      inset 0 0 0 1px rgba(139, 116, 255, 0.1),
+      0 0 0 rgba(139, 116, 255, 0);
+  }
+  38%,
+  52% {
+    box-shadow:
+      inset 0 0 0 1px rgba(186, 169, 255, 0.26),
+      0 0 18px rgba(99, 74, 198, 0.16);
+  }
+}
+
+.icon-auto-cycle {
+  animation: icon-illumination 8.6s cubic-bezier(0.45, 0.02, 0.24, 1) infinite;
+  animation-delay: var(--illumination-delay, 0s);
+  will-change: opacity, filter;
+}
+
+.icon-auto-cycle-core {
+  animation-duration: 10.2s;
+}
+
+.icon-shell-cycle {
+  animation: icon-shell-illumination 8.6s cubic-bezier(0.45, 0.02, 0.24, 1) infinite;
+  animation-delay: var(--illumination-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-auto-cycle,
+  .icon-shell-cycle {
+    animation: none !important;
+  }
+}

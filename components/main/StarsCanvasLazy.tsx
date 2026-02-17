@@ -6,17 +6,20 @@ type Star = {
   x: number;
   y: number;
   r: number;
-  alpha: number;
-  alphaMin: number;
-  alphaMax: number;
-  twinkle: number;
+  depth: number;
+  baseAlpha: number;
+  twinkleAmplitude: number;
+  twinkleSpeed: number;
+  twinklePhase: number;
   driftX: number;
   driftY: number;
+  speedPhase: number;
+  speedVariance: number;
+  tone: string;
 };
 
 export default function StarsCanvasLazy() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const SPEED_MULTIPLIER = 1.9;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,25 +32,41 @@ export default function StarsCanvasLazy() {
     let width = 0;
     let height = 0;
     let gradient: CanvasGradient | null = null;
+    let accentGradient: CanvasGradient | null = null;
+    let vignetteGradient: CanvasGradient | null = null;
     let stars: Star[] = [];
+    let lastFrameTime = 0;
+
+    const clamp = (value: number, min: number, max: number) =>
+      Math.min(max, Math.max(min, value));
 
     const createStar = (): Star => {
+      const depth = Math.random();
       const isSlightlyLarger = Math.random() > 0.97;
+      const baseSpeed = 9 + depth * 18;
+      const driftX = (Math.random() - 0.5) * (4 + depth * 5);
+
       return {
         x: Math.random() * width,
         y: Math.random() * height,
         r: isSlightlyLarger
-          ? Math.random() * 0.14 + 0.26
+          ? Math.random() * 0.12 + 0.25
           : Math.random() * 0.11 + 0.07,
-        alpha: Math.random() * 0.6 + 0.25,
-        alphaMin: 0.12 + Math.random() * 0.1,
-        alphaMax: 0.78 + Math.random() * 0.2,
-        twinkle:
-          (Math.random() * 0.035 + 0.012) *
-          (Math.random() > 0.5 ? 1 : -1) *
-          SPEED_MULTIPLIER,
-        driftX: (Math.random() - 0.5) * 0.16 * SPEED_MULTIPLIER,
-        driftY: (Math.random() * 0.36 + 0.14) * SPEED_MULTIPLIER,
+        depth,
+        baseAlpha: 0.2 + Math.random() * 0.55,
+        twinkleAmplitude: 0.06 + Math.random() * 0.2,
+        twinkleSpeed: 0.65 + Math.random() * 1.1,
+        twinklePhase: Math.random() * Math.PI * 2,
+        driftX,
+        driftY: baseSpeed,
+        speedPhase: Math.random() * Math.PI * 2,
+        speedVariance: 0.08 + Math.random() * 0.22,
+        tone:
+          Math.random() > 0.88
+            ? "#dce7ff"
+            : Math.random() > 0.66
+              ? "#f3f7ff"
+              : "#ffffff",
       };
     };
 
@@ -70,33 +89,67 @@ export default function StarsCanvasLazy() {
         height * 0.5,
         Math.max(width, height)
       );
-      gradient.addColorStop(0, "#09051d");
-      gradient.addColorStop(0.55, "#050214");
+      gradient.addColorStop(0, "#0a0722");
+      gradient.addColorStop(0.48, "#050216");
       gradient.addColorStop(1, "#030014");
+
+      accentGradient = ctx.createRadialGradient(
+        width * 0.82,
+        height * 0.12,
+        0,
+        width * 0.82,
+        height * 0.12,
+        Math.max(width, height) * 0.72
+      );
+      accentGradient.addColorStop(0, "rgba(122, 170, 255, 0.11)");
+      accentGradient.addColorStop(0.38, "rgba(98, 128, 255, 0.05)");
+      accentGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+      vignetteGradient = ctx.createRadialGradient(
+        width * 0.5,
+        height * 0.55,
+        Math.max(width, height) * 0.08,
+        width * 0.5,
+        height * 0.55,
+        Math.max(width, height) * 0.92
+      );
+      vignetteGradient.addColorStop(0, "rgba(0, 0, 0, 0)");
+      vignetteGradient.addColorStop(1, "rgba(2, 1, 10, 0.36)");
 
       const count = Math.max(220, Math.floor((width * height) / 6000));
       stars = Array.from({ length: count }, createStar);
     };
 
-    const draw = () => {
+    const draw = (time: number) => {
       if (!gradient) {
         frameId = window.requestAnimationFrame(draw);
         return;
       }
 
+      if (lastFrameTime === 0) {
+        lastFrameTime = time;
+      }
+      const delta = Math.min((time - lastFrameTime) / 1000, 0.05);
+      lastFrameTime = time;
+      const smoothTime = time * 0.001;
+
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = "#ffffff";
+      if (accentGradient) {
+        ctx.fillStyle = accentGradient;
+        ctx.fillRect(0, 0, width, height);
+      }
+      if (vignetteGradient) {
+        ctx.fillStyle = vignetteGradient;
+        ctx.fillRect(0, 0, width, height);
+      }
 
       for (const star of stars) {
-        star.alpha += star.twinkle;
-        if (star.alpha > star.alphaMax || star.alpha < star.alphaMin) {
-          star.twinkle *= -1;
-        }
-
-        star.x += star.driftX;
-        star.y += star.driftY;
+        const speedPulse =
+          1 + Math.sin(smoothTime * 0.36 + star.speedPhase) * star.speedVariance;
+        star.x += star.driftX * speedPulse * delta;
+        star.y += star.driftY * speedPulse * delta;
 
         if (star.x > width + 2) {
           star.x = -2;
@@ -109,13 +162,20 @@ export default function StarsCanvasLazy() {
           star.x = Math.random() * width;
         }
 
-        ctx.globalAlpha = star.alpha;
+        const twinkleWave = Math.sin(smoothTime * star.twinkleSpeed + star.twinklePhase);
+        const alpha = clamp(
+          star.baseAlpha + twinkleWave * star.twinkleAmplitude,
+          0.08,
+          0.96
+        );
+
+        ctx.fillStyle = star.tone;
+        ctx.globalAlpha = alpha;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Soft halo to make movement obvious without overpowering foreground content.
-        ctx.globalAlpha = star.alpha * 0.08;
+        ctx.globalAlpha = alpha * (0.06 + star.depth * 0.07);
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r * 1.18, 0, Math.PI * 2);
         ctx.fill();
@@ -126,7 +186,7 @@ export default function StarsCanvasLazy() {
     };
 
     resize();
-    draw();
+    frameId = window.requestAnimationFrame(draw);
     window.addEventListener("resize", resize);
 
     return () => {
