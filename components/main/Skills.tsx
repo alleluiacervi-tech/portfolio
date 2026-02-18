@@ -42,7 +42,7 @@ const DESIGN_PRIORITY = [
   "Framer Motion",
   "Tailwind Css",
   "Material UI",
-  "Next js 13",
+  "Next.js",
   "React",
 ];
 
