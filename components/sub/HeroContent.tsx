@@ -15,7 +15,7 @@ const PROFILE_PRIMARY_DESCRIPTOR = "Brand & Digital Designer";
 const PROFILE_SECONDARY_DESCRIPTOR = "Strategic Visual Systems Specialist";
 const PROFILE_DEVELOPMENT_ROLE = "Software Developer";
 const PROFILE_DESCRIPTION =
-  "I design brand-led digital products with clear hierarchy, cohesive systems, and implementation-ready precision.";
+  "I design brand-led digital products and build applications with modern technologies, combining clear hierarchy with implementation-ready precision.";
 const PROFILE_ABOUT =
   "I approach every project with strategic thinking, using design systems and strong visual structure to create scalable solutions that perform in real-world usability.";
 const PROFILE_PHOTO = "/alleluia.jpg";
