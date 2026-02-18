@@ -27,7 +27,11 @@ export const selectedDesignProjects: PortfolioProject[] = [
     featured: true,
   },
   {
-    src: "/Design3.jpg",
+    src: "https://i.pinimg.com/736x/a8/5b/08/a85b0884d14de00c438f94cd074faaf4.jpg",
+    gallery: [
+      "https://i.pinimg.com/736x/30/be/1f/30be1f21954bcb1e1f5b5db07f781fe0.jpg",
+      "https://i.pinimg.com/1200x/93/a7/ba/93a7babde670a14aa1dbe2c009d70d93.jpg",
+    ],
     title: "Operations Analytics Dashboard",
     summary:
       "A dashboard environment designed for quick executive scanning and confident data-led decisions.",
