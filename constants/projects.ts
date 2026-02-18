@@ -41,8 +41,13 @@ export const selectedDesignProjects: PortfolioProject[] = [
       "Created a clear interface system that supports quicker insight extraction and cleaner reporting workflows.",
   },
   {
-    src: "/Design1.jpg",
-    gallery: ["/Design1.jpg", "/Design2.jpeg", "/Design4.jpeg"],
+    src: "/Fintech.png",
+    gallery: [
+      "/Fintech1.png",
+      "/Fintech2.jpeg",
+      "/Fintech3.jpeg",
+      "/Fintech4.jpeg",
+    ],
     title: "Fintech Mobile Experience Suite",
     summary:
       "A high-clarity mobile visual direction for trading and wallet experiences with confident interaction patterns.",
