@@ -58,12 +58,11 @@
   }
 
   .panel-card {
-    @apply rounded-2xl border border-[#7042f84c] p-6 shadow-[0_16px_46px_rgba(16,8,42,0.34)] backdrop-blur-sm transition-all duration-300;
-    background-color: rgba(11, 4, 38, 0.62);
+    @apply rounded-none border border-transparent bg-transparent p-6 shadow-none backdrop-blur-none transition-none;
   }
 
   .panel-card-hover {
-    @apply hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_24px_58px_rgba(42,14,97,0.36)];
+    @apply hover:translate-y-0 hover:border-transparent hover:shadow-none;
   }
 
   .clean-divider {

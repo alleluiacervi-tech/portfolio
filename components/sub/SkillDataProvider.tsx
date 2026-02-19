@@ -32,7 +32,7 @@ const SkillDataProvider = ({ src, width, height, index, label }: Props) => {
       animate={inView ? "visible" : "hidden"}
       custom={index}
       transition={{ delay: index * animationDelay, duration: 0.35 }}
-      className="flex min-h-[108px] min-w-[108px] flex-col items-center justify-center rounded-xl border border-[#8b74ff]/25 bg-[#110736]/55 px-4 py-3 text-center shadow-[0_8px_24px_rgba(16,8,42,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8b74ff]/50 hover:bg-[#130a3d]/70"
+      className="flex min-h-[96px] min-w-[84px] flex-col items-center justify-center px-2 py-2 text-center opacity-90 transition-all duration-300 hover:opacity-100"
     >
       <Image src={src} width={width} height={height} alt={`${label ?? "skill"} icon`} />
       {label ? (

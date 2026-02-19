@@ -7,8 +7,6 @@ type Star = {
   y: number;
   r: number;
   depth: number;
-  glowScale: number;
-  sizeTier: "small" | "medium" | "large";
   baseAlpha: number;
   twinkleAmplitude: number;
   twinkleSpeed: number;
@@ -44,51 +42,27 @@ export default function StarsCanvasLazy() {
 
     const createStar = (): Star => {
       const depth = Math.random();
-      const sizeRoll = Math.random();
-      const sizeTier =
-        sizeRoll > 0.95 ? "large" : sizeRoll > 0.76 ? "medium" : "small";
-
-      // Fast but controlled motion for a polished cinematic flow.
-      const baseSpeed =
-        (sizeTier === "large" ? 30 : sizeTier === "medium" ? 26 : 22) +
-        depth * 42;
-      const driftX =
-        (Math.random() - 0.5) *
-        (sizeTier === "large" ? 13 : sizeTier === "medium" ? 10 : 8);
+      const isSlightlyLarger = Math.random() > 0.97;
+      const baseSpeed = 9 + depth * 18;
+      const driftX = (Math.random() - 0.5) * (4 + depth * 5);
 
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        r:
-          sizeTier === "large"
-            ? Math.random() * 0.65 + 1.8
-            : sizeTier === "medium"
-              ? Math.random() * 0.55 + 1.0
-              : Math.random() * 0.5 + 0.42,
+        r: isSlightlyLarger
+          ? Math.random() * 0.12 + 0.25
+          : Math.random() * 0.11 + 0.07,
         depth,
-        glowScale:
-          sizeTier === "large" ? 1.75 : sizeTier === "medium" ? 1.5 : 1.24,
-        sizeTier,
-        baseAlpha:
-          sizeTier === "large"
-            ? 0.5 + Math.random() * 0.4
-            : sizeTier === "medium"
-              ? 0.36 + Math.random() * 0.46
-              : 0.22 + Math.random() * 0.5,
-        twinkleAmplitude:
-          sizeTier === "large" ? 0.05 + Math.random() * 0.14 : 0.06 + Math.random() * 0.2,
-        twinkleSpeed: 0.85 + Math.random() * 1.25,
+        baseAlpha: 0.2 + Math.random() * 0.55,
+        twinkleAmplitude: 0.06 + Math.random() * 0.2,
+        twinkleSpeed: 0.65 + Math.random() * 1.1,
         twinklePhase: Math.random() * Math.PI * 2,
         driftX,
         driftY: baseSpeed,
         speedPhase: Math.random() * Math.PI * 2,
-        speedVariance: 0.1 + Math.random() * 0.2,
+        speedVariance: 0.08 + Math.random() * 0.22,
         tone:
-          sizeTier === "large"
-            ? "#eef3ff"
-            : sizeTier === "medium"
-              ? "#e8f0ff"
-              : Math.random() > 0.88
+          Math.random() > 0.88
             ? "#dce7ff"
             : Math.random() > 0.66
               ? "#f3f7ff"
@@ -142,7 +116,7 @@ export default function StarsCanvasLazy() {
       vignetteGradient.addColorStop(0, "rgba(0, 0, 0, 0)");
       vignetteGradient.addColorStop(1, "rgba(2, 1, 10, 0.36)");
 
-      const count = clamp(Math.floor((width * height) / 2650), 420, 980);
+      const count = Math.max(220, Math.floor((width * height) / 6000));
       stars = Array.from({ length: count }, createStar);
     };
 
@@ -173,18 +147,18 @@ export default function StarsCanvasLazy() {
 
       for (const star of stars) {
         const speedPulse =
-          1 + Math.sin(smoothTime * 0.52 + star.speedPhase) * star.speedVariance;
+          1 + Math.sin(smoothTime * 0.36 + star.speedPhase) * star.speedVariance;
         star.x += star.driftX * speedPulse * delta;
         star.y += star.driftY * speedPulse * delta;
 
-        if (star.x > width + 4) {
-          star.x = -4;
-        } else if (star.x < -4) {
-          star.x = width + 4;
+        if (star.x > width + 2) {
+          star.x = -2;
+        } else if (star.x < -2) {
+          star.x = width + 2;
         }
 
-        if (star.y > height + 4) {
-          star.y = -4;
+        if (star.y > height + 2) {
+          star.y = -2;
           star.x = Math.random() * width;
         }
 
@@ -201,11 +175,9 @@ export default function StarsCanvasLazy() {
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.globalAlpha =
-          alpha *
-          (0.06 + star.depth * 0.09 + (star.sizeTier === "large" ? 0.045 : 0));
+        ctx.globalAlpha = alpha * (0.06 + star.depth * 0.07);
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * star.glowScale, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r * 1.18, 0, Math.PI * 2);
         ctx.fill();
       }
 

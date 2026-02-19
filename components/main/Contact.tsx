@@ -94,7 +94,7 @@ const Contact = () => {
           </p>
 
           <div className="mt-8 space-y-4">
-            <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
+            <div className="flex items-start gap-3 border-b border-[#8b74ff]/20 pb-4">
               <EnvelopeIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Email</p>
@@ -107,7 +107,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
+            <div className="flex items-start gap-3 border-b border-[#8b74ff]/20 pb-4">
               <PhoneIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Phone</p>
@@ -120,7 +120,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
+            <div className="flex items-start gap-3 border-b border-[#8b74ff]/20 pb-4">
               <MapPinIcon className="mt-0.5 h-5 w-5 text-[#b49bff]" />
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#b49bff]">Location</p>
@@ -128,7 +128,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="rounded-xl border border-[#8b74ff]/35 bg-[#140b3c]/60 p-4">
+            <div className="pt-2">
               <div className="flex items-center gap-2">
                 <a
                   href={CONTACT_X_URL}

@@ -16,6 +16,7 @@ interface Props {
   featured?: boolean;
   className?: string;
   rotationMs?: number;
+  variant?: "card" | "plain";
 }
 
 const ProjectCard = ({
@@ -31,6 +32,7 @@ const ProjectCard = ({
   featured = false,
   className = "",
   rotationMs = 4500,
+  variant = "card",
 }: Props) => {
   const imageSources = useMemo(() => {
     const uniqueSources = [src, ...gallery].filter(
@@ -87,12 +89,15 @@ const ProjectCard = ({
     { label: "Result", value: result },
   ].filter((row) => Boolean(row.value?.trim()));
   const summaryText = summary ?? description ?? "";
+  const isCardVariant = variant === "card";
 
   const cardClassName = [
-    "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-[#0b0426]/70 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500",
-    featured
-      ? "border-[#8b74ff]/65 shadow-[0_22px_52px_rgba(42,14,97,0.34)] hover:-translate-y-[5px] hover:border-[#b49bff]/75 hover:shadow-[0_30px_70px_rgba(42,14,97,0.42)]"
-      : "border-[#4e2a96]/65 shadow-[0_14px_34px_rgba(42,14,97,0.24)] hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_24px_54px_rgba(42,14,97,0.34)]",
+    "group relative flex h-full flex-col overflow-hidden transition-[transform,border-color,box-shadow] duration-500",
+    isCardVariant
+      ? featured
+        ? "rounded-2xl border border-[#8b74ff]/65 bg-[#0b0426]/70 shadow-[0_22px_52px_rgba(42,14,97,0.34)] backdrop-blur-sm hover:-translate-y-[5px] hover:border-[#b49bff]/75 hover:shadow-[0_30px_70px_rgba(42,14,97,0.42)]"
+        : "rounded-2xl border border-[#4e2a96]/65 bg-[#0b0426]/70 shadow-[0_14px_34px_rgba(42,14,97,0.24)] backdrop-blur-sm hover:-translate-y-1 hover:border-[#8b74ff]/65 hover:shadow-[0_24px_54px_rgba(42,14,97,0.34)]"
+      : "border-0 bg-transparent shadow-none",
     className,
   ]
     .filter(Boolean)
@@ -110,7 +115,11 @@ const ProjectCard = ({
         }
       }}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div
+        className={`relative aspect-[16/10] overflow-hidden ${
+          isCardVariant ? "" : "rounded-xl border border-[#5c3ea8]/30"
+        }`}
+      >
         {imageSources.map((imageSource, index) => (
           <Image
             key={`${title}-${imageSource}`}
@@ -118,7 +127,9 @@ const ProjectCard = ({
             alt={title}
             fill
             sizes="(max-width: 768px) 92vw, (max-width: 1280px) 48vw, 32vw"
-            className={`h-full w-full object-cover object-center transition-[opacity,transform] duration-700 group-hover:scale-[1.03] ${
+            className={`h-full w-full object-cover object-center transition-[opacity,transform] duration-700 ${
+              isCardVariant ? "group-hover:scale-[1.03]" : "group-hover:scale-[1.01]"
+            } ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -158,25 +169,43 @@ const ProjectCard = ({
         ) : null}
       </div>
 
-      <div className="relative flex flex-1 flex-col p-5 md:p-6">
+      <div
+        className={`relative flex flex-1 flex-col ${
+          isCardVariant ? "p-5 md:p-6" : "px-1 pb-1 pt-4"
+        }`}
+      >
         {category ? (
-          <p className="inline-flex w-fit rounded-full border border-[#8b74ff]/45 bg-[#8b74ff]/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-[#cfc3ff]">
+          <p
+            className={`inline-flex w-fit ${
+              isCardVariant
+                ? "rounded-full border border-[#8b74ff]/45 bg-[#8b74ff]/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-[#cfc3ff]"
+                : "text-[11px] uppercase tracking-[0.14em] text-[#bdaeff]"
+            }`}
+          >
             {category}
           </p>
         ) : null}
         <h3
           className={`project-card-title mt-3 font-semibold leading-snug text-white ${
-            featured ? "text-xl md:text-2xl" : "text-lg md:text-xl"
+            isCardVariant
+              ? featured
+                ? "text-xl md:text-2xl"
+                : "text-lg md:text-xl"
+              : "text-xl md:text-2xl"
           }`}
         >
           {title}
         </h3>
         {summaryText ? (
-          <p className="project-card-description mt-2 text-sm leading-relaxed text-slate-300">
+          <p
+            className={`mt-2 text-sm leading-relaxed text-slate-300 ${
+              isCardVariant ? "project-card-description" : ""
+            }`}
+          >
             {summaryText}
           </p>
         ) : null}
-        {detailRows.length > 0 ? (
+        {isCardVariant && detailRows.length > 0 ? (
           <div className="mt-4 space-y-2.5 border-t border-[#8b74ff]/25 pt-4">
             {detailRows.map((row) => (
               <p

@@ -25,10 +25,11 @@ const Projects = () => {
               purpose={project.purpose}
               concept={project.concept}
               result={project.result}
+              variant="plain"
             />
           ))}
         </div>
-        <div className="panel-card mt-10 md:mt-12">
+        <div className="mt-10 border-t border-[#8b74ff]/25 pt-8 md:mt-12">
           <p className="section-eyebrow">Private Projects</p>
           <h3 className="mt-3 text-xl font-semibold text-white md:text-2xl">
             And Many Other Private Projects

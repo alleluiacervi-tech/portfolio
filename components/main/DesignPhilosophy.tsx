@@ -35,7 +35,7 @@ const DesignPhilosophy = () => {
           {PHILOSOPHY_POINTS.map((point) => (
             <div
               key={point.title}
-              className="rounded-xl border border-[#8b74ff]/30 bg-[#140b3c]/50 p-4"
+              className="border-l border-[#8b74ff]/35 pl-4"
             >
               <h3 className="text-sm font-semibold uppercase tracking-[0.08em] text-[#dcd2ff]">
                 {point.title}
