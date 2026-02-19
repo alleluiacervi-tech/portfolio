@@ -58,7 +58,8 @@
   }
 
   .panel-card {
-    @apply rounded-2xl border border-[#7042f84c] bg-[#0b0426]/62 p-6 shadow-[0_16px_46px_rgba(16,8,42,0.34)] backdrop-blur-sm transition-all duration-300;
+    @apply rounded-2xl border border-[#7042f84c] p-6 shadow-[0_16px_46px_rgba(16,8,42,0.34)] backdrop-blur-sm transition-all duration-300;
+    background-color: rgba(11, 4, 38, 0.62);
   }
 
   .panel-card-hover {
