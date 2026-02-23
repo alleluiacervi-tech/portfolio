@@ -22,7 +22,7 @@
     "react-icons": "^4.11.0"
   },
   "devDependencies": {
-    "@react-three/drei": "^9.88.4",
+    "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^8.15.4",
     "@types/node": "^20",
     "@types/react": "^18",
